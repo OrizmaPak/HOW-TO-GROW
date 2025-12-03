@@ -111,6 +111,8 @@
             </span>
         </div>
     <span class="w-full flex justify-end gap-5">
+                        <button type="button" class="j-action-btn" style="margin-right: 40px;padding:10px; text-transform: capitalize;width:inherit;" id="selectall"> Select All </button>
+                        <button type="button" class="j-action-btn" style="margin-right: 40px;padding:10px; text-transform: capitalize;width:inherit;" id="deselectall"> Deselect All </button>
                         <button type="button" class="j-action-btn" style="margin-right: 40px;padding:10px; text-transform: capitalize;width:inherit;" id="submitforapproval"> Pay Selected </button>
                         <button type="button" class="j-action-btn" style="padding:10px; background: red; text-transform: capitalize;width:inherit;" id="submitfordisapproval"> Cancel Selected </button>
                     </span>

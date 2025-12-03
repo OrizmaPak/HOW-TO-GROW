@@ -9,6 +9,28 @@ async function openInterbankTransfer() {
             if(form.querySelector('button#export-it')) form.querySelector('button#export-it').addEventListener('click', exportInterbanktransferTable)
             if(document.getElementById('submitforapproval'))document.getElementById('submitforapproval').addEventListener('click', submitinterbankforapproval)
             if(document.getElementById('submitfordisapproval'))document.getElementById('submitfordisapproval').addEventListener('click', submitinterbankfordisapproval)
+            if(document.getElementById('selectall'))document.getElementById('selectall').addEventListener('click', e=>{
+                // Only select visible checkboxes (not hidden ones)
+                const checkboxes = document.getElementsByName('selectot');
+                for(let i=0;i<checkboxes.length;i++){
+                    const checkbox = checkboxes[i];
+                    // Check if checkbox is visible (not hidden via class or CSS)
+                    if(checkbox && !checkbox.classList.contains('hidden') && checkbox.offsetParent !== null){
+                        checkbox.checked = true;
+                    }
+                }
+            })
+            if(document.getElementById('deselectall'))document.getElementById('deselectall').addEventListener('click', e=>{
+                // Only deselect visible checkboxes (not hidden ones)
+                const checkboxes = document.getElementsByName('selectot');
+                for(let i=0;i<checkboxes.length;i++){
+                    const checkbox = checkboxes[i];
+                    // Check if checkbox is visible (not hidden via class or CSS)
+                    if(checkbox && !checkbox.classList.contains('hidden') && checkbox.offsetParent !== null){
+                        checkbox.checked = false;
+                    }
+                }
+            })
             if(form.querySelector('#startdate'))form.querySelector('#startdate').valueAsDate = new Date()
             if(form.querySelector('#enddate'))form.querySelector('#enddate').valueAsDate = new Date()
             
@@ -233,10 +255,15 @@ function viewInterbanktransfersetCurrentPage (pageNum){
 }
 
 async function appendInterbanktransfersTableRows(item, index) {
+     // Check if checkbox should be hidden (case-insensitive, trimmed)
+     const status = String(item.transactionstatus || '').trim().toUpperCase();
+     const shouldHide = status === 'SUCCESS' || status === 'PROCESSING';
+     const hiddenClass = shouldHide ? 'hidden' : '';
+     
      jtabledata.innerHTML += `
         <tr class="source-row-item">
             <td>${index + 1}</td>
-            <td><input class="${item.transactionstatus == 'SUCCESS' ? 'hidden': ''}  ${item.transactionstatus == 'PROCESSING' ? 'hidden': ''}" type="checkbox" name="selectot" id="check_${item.id}" /></td>
+            <td><input class="${hiddenClass}" type="checkbox" name="selectot" id="check_${item.id}" /></td>
             <td>${item.source}</td>
             <td>${item.currency}</td>
             <td>${item.bankname}</td>
@@ -251,7 +278,7 @@ async function appendInterbanktransfersTableRows(item, index) {
             <td>${item.localreference}</td>
             <td style="text-align:left">${formatMoney(item.amount)}</td>
             <td class="no-pr">
-                <div  style="align-items:center;display: ${item.authorisation == 'APPROVED' ? 'flex': 'none'};display: flex;gap: 10px" class="flex no-pr  ${item.transactionstatus == 'SUCCESS' ? 'hidden': ''}  ${item.transactionstatus == 'PROCESSING' ? 'hidden': ''}">
+                <div  style="align-items:center;display: ${item.authorisation == 'APPROVED' ? 'flex': 'none'};display: flex;gap: 10px" class="flex no-pr  ${hiddenClass}">
                     <button ${item.transactionstatus == 'PENDING' ? 'disabled': ''} style="padding: 5px 6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:green;border-radius:3px; display: ${item.transactionstatus == 'PENDING' ? 'none': 'block'}" value="${index}" onclick="payInterbankTransfer(${index})">Pay</button>
                     <button style="padding: 5px 6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:tomato;border-radius:3px;" value="${index}" onclick="cancelInterbankTransfer(${index})">Cancel</button>
                 </div>
