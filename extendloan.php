@@ -1,0 +1,32 @@
+<?php
+$displayhtml .= '<div class="jcontainer">';
+$displayhtml .= '<div>';
+$displayhtml .= '<h1 class="jpageheader"> loan extension </h1>';
+$displayhtml .= '</div>';
+$displayhtml .= '<div class="jpagecontent">';
+$displayhtml .= '<div>';
+$displayhtml .= '<form class="jform" id="loanaccountform">';
+$displayhtml .= '';
+$displayhtml .= '<div class="section-header">';
+$displayhtml .= '<h1>account info</h1>';
+$displayhtml .= '</div>';
+$displayhtml .= '<div class="jformcontainer">';
+$displayhtml .= '<div class="jformgroup">';
+$displayhtml .= '<div class="jformgroup jformgroupcol">';
+$displayhtml .= '<label class="jcontrollabel"> Extend This Loan Account: </label>';
+$displayhtml .= '<input placeholder="Enter loan account" type="text"';
+$displayhtml .= 'class="jformcontrol jmargin-top" id="loanaccounts" name="loanaccounts">';
+$displayhtml .= '</div>';
+$displayhtml .= '</div>';
+$displayhtml .= '</div>';
+$displayhtml .= '';
+$displayhtml .= '<div id ="accountcontainer">';
+$displayhtml .= '';
+$displayhtml .= '</div>';
+$displayhtml .= '';
+$displayhtml .= '</form>';
+$displayhtml .= '</div>';
+$displayhtml .= '</div>';
+$displayhtml .= '</div>';
+echo $displayhtml;
+?>

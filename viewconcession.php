@@ -1,0 +1,64 @@
+<?php
+session_start();
+
+$displayhtml .='<div class="formcontainer">';
+$displayhtml .='<div class="formheader">';
+$displayhtml .='<h5>VIEW CONCESSION</h5>';
+$displayhtml .='</div>';
+$displayhtml .='<div class="formmain ">';
+$displayhtml .='';
+$displayhtml .='<div class="split3">';
+$displayhtml .='<div class="formcontrol ">';
+$displayhtml .='<label for="selectbranch">Select Branch</label>';
+$displayhtml .='<select name="selectbranch" id="selectbranch" class="selectbranch">';
+$displayhtml .='<option value=""></option>';
+$displayhtml .='</select>';
+$displayhtml .='<button class="sortarrow btnicon">';
+$displayhtml .='<span>';
+$displayhtml .='<img src="images/icons/sort-arrows.png" alt="" />';
+$displayhtml .='</span>';
+$displayhtml .='</button>';
+$displayhtml .='</div>';
+$displayhtml .='<div class="formcontrol">';
+$displayhtml .='<label for="totaldeposit">Total Deposit</label>';
+$displayhtml .='<input type="text" name="totaldeposit" class="totaldeposit" id="totaldeposit">';
+$displayhtml .='</div>';
+$displayhtml .='<div class="formcontrol">';
+$displayhtml .='<label for="totalcommission">Total Commisssion</label>';
+$displayhtml .='<input type="text" name="totalcommission" class="totalcommission" id="totalcommission">';
+$displayhtml .='</div>';
+$displayhtml .='</div>';
+$displayhtml .='';
+$displayhtml .='';
+$displayhtml .='<!-- <h5>Total Quantity</h5>';
+$displayhtml .='<span class=" showvalue totalquantity">13494940</span> -->';
+$displayhtml .='';
+$displayhtml .='<div class="generaltableholder">';
+$displayhtml .='<table id="table">';
+$displayhtml .='<tr class="fixedrow">';
+$displayhtml .='<th></th>';
+$displayhtml .='<th>Account No</th>';
+$displayhtml .='<th>Branch</th>';
+$displayhtml .='<th>Month</th>';
+$displayhtml .='<th>Total Deposit</th>';
+$displayhtml .='<th>Service Charge</th>';
+$displayhtml .='<th>Commission</th>';
+$displayhtml .='</tr>';
+$displayhtml .='';
+$displayhtml .='<!-- <tr>';
+$displayhtml .='<td>1</td>';
+$displayhtml .='<td></td>';
+$displayhtml .='<td></td>';
+$displayhtml .='<td></td>';
+$displayhtml .='<td></td>';
+$displayhtml .='<td></td>';
+$displayhtml .='<td></td>';
+$displayhtml .='</tr> -->';
+$displayhtml .='</table>';
+$displayhtml .='</div>';
+$displayhtml .='</div>';
+$displayhtml .='</div>';
+
+echo $displayhtml;
+?>
+

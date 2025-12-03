@@ -1,0 +1,184 @@
+<script type="text/javascript" src="./js/addloanfee.js"></script>
+<script type="text/javascript" src="./js/loanproducts.js"></script>
+<script type="text/javascript" src="./js/loanaccount.js"></script>
+<script type="text/javascript" src="./js/viewloans.js"></script>
+<script type="text/javascript" src="./js/collateral.js"></script>
+<script type="text/javascript" src="./js/approveloans.js"></script>
+<script type="text/javascript" src="./js/activeloan.js"></script>
+<script type="text/javascript" src="./js/dueloan.js"></script>
+<script type="text/javascript" src="./js/missedrepaymentloans.js"></script>
+<script type="text/javascript" src="./js/pastmaturitydateloans.js"></script>
+<script type="text/javascript" src="./js/norepaymentloans.js"></script>
+<script type="text/javascript" src="./js/repaymentschedule.js"></script>
+<script type="text/javascript" src="./js/loantransactionreport.js"></script>
+<script type="text/javascript" src="./js/loanclassificationreport.js"></script>
+
+
+ <script type="text/javascript" src="./js/buildpropertyitems.js"></script>
+ <script type="text/javascript" src="./js/propertyaccount.js"></script>
+ <script type="text/javascript" src="./js/viewcompositeitems.js"></script>
+    <script type="text/javascript" src="./js/viewpropertyaccounts.js"></script>
+ <script type="text/javascript" src="./js/maturedproperrtyaccounts.js"></script>
+ <script type="text/javascript" src="./js/missedmaturity.js"></script>
+ <script type="text/javascript" src="./js/propertytransactionreport.js"></script>
+    <script type="text/javascript" src="./js/propertydelivery.js"></script>
+    <script type="text/javascript" src="./js/viewdelivery.js"></script>
+    <script type="text/javascript" src="./js/reversedelivery.js"></script>
+    <script type="text/javascript" src="./js/propertystockout.js"></script>
+    <script type="text/javascript" src="./js/propertydepositanalysis.js"></script>
+  <script type="text/javascript" src="./js/propertydepositstatus.js"></script>
+    <script type="text/javascript" src="./js/propertycommissions.js"></script>
+<script type="text/javascript" src="./js/propertyledger.js"></script>
+
+
+ <script type="text/javascript" src="./js/savingsproducts.js"></script>
+    <script type="text/javascript" src="./js/savingsaccountproducts.js"></script>
+    <script type="text/javascript" src="./js/savingsaccount.js"></script>
+    <script type="text/javascript" src="./js/viewsavingsaccount.js"></script>
+    <script type="text/javascript" src="./js/statementofaccount.js"></script>
+    <script type="text/javascript" src="./js/savingsdepositanalysis.js"></script>
+    <script type="text/javascript" src="./js/transfersavings.js"></script>
+    <script type="text/javascript" src="./js/savingstransactions.js"></script>
+
+
+    <script type="text/javascript" src="./js/customeraccount.js"></script>
+    <script type="text/javascript" src="./js/viewcustomers.js"></script>
+
+
+    <script type="text/javascript" src="./js/expenditure.js"></script>
+    <script type="text/javascript" src="./js/viewexpenditures.js"></script>
+    <script type="text/javascript" src="./js/payments.js"></script>
+    <script type="text/javascript" src="./js/viewpayments.js"></script>
+
+    <script type="text/javascript" src="./js/interbanktransfer.js"></script>
+    <script type="text/javascript" src="./js/viewrecipients.js"></script>
+<script type="text/javascript" src="./js/viewtransfers.js"></script>
+
+
+    <script type="text/javascript" src="./js/collections.js"></script>
+    <script type="text/javascript" src="./js/collectionsview.js"></script>
+    <script type="text/javascript" src="./js/updatedailyunit.js"></script>
+    <script type="text/javascript" src="./js/collectionsdeclineview.js"></script>
+    <script type="text/javascript" src="./js/collectionsapproveview.js"></script>
+    <script type="text/javascript" src="./js/branchfundtransfer.js"></script>
+    <script type="text/javascript" src="./js/viewbranchfundtransfer.js"></script>
+    <script type="text/javascript" src="./js/confirmbalancebroughtforward.js"></script>
+    <script type="text/javascript" src="./js/counterpostwrongaccountentry.js"></script>
+    <script type="text/javascript" src="./js/counterdepositincorrectamountpaid.js"></script>
+    <script type="text/javascript" src="./js/userconfirmtransaction.js"></script>
+    <script type="text/javascript" src="./js/aggregatedbranchdeposits.js"></script>
+    <script type="text/javascript" src="./js/withdrawal.js"></script>
+    <script type="text/javascript" src="./js/viewwithdrawals.js"></script>
+    <script type="text/javascript" src="./js/approvewithdrawals.js"></script>
+    <script type="text/javascript" src="./js/deposits.js"></script>
+    <script type="text/javascript" src="./js/viewdeposits.js"></script>
+    <script type="text/javascript" src="./js/approvedeposits.js"></script>
+    <script type="text/javascript" src="./js/group-deposit.js"></script>
+    <script type="text/javascript" src="./js/viewgroupdeposits.js"></script>
+    <script type="text/javascript" src="./js/editerrorsindeposit.js"></script>
+    <script type="text/javascript" src="./js/viewediteddeposits.js"></script>
+    <script type="text/javascript" src="./js/viewdeleteddeposits.js"></script>
+    <script type="text/javascript" src="./js/editwithdrawals.js"></script>
+    <script type="text/javascript" src="./js/vieweditedwithdraws.js"></script>
+    <script type="text/javascript" src="./js/viewdeletedwithdrawals.js"></script>
+    <script type="text/javascript" src="./js/dailytransaction.js"></script>
+    <script type="text/javascript" src="./js/resolveexcessandreturnedcash.js"></script>
+    <script type="text/javascript" src="./js/nettransaction.js"></script>
+    <script type="text/javascript" src="./js/groupsystemcashposition.js"></script>
+    <script type="text/javascript" src="./js/excesscashreport.js"></script>
+ <script type="text/javascript" src="./js/returnedcashreport.js"></script>
+
+
+    <script type="text/javascript" src="./js/consolidatereport.js"></script>
+    <script type="text/javascript" src="./js/viewstaffloan.js"></script>
+    
+    
+    
+     <script type="text/javascript" src="./js/scheduleroster.js"></script>
+    <script type="text/javascript" src="./js/viewscheduleroster.js"></script>
+    <script type="text/javascript" src="./js/commissioncategories.js"></script>
+    <script type="text/javascript" src="./js/approvebooklets.js"></script>
+    <script type="text/javascript" src="./js/viewstaffadvance.js"></script>
+    <script type="text/javascript" src="./js/warehousesaless.js"></script>
+    <script type="text/javascript" src="./js/viewwarehousesaless.js"></script>
+    <script type="text/javascript" src="./js/stockreturnview.js"></script>
+    <script type="text/javascript" src="./js/advance.js"></script>
+    <script type="text/javascript" src="./js/cashierlimit.js"></script>
+    <script type="text/javascript" src="./js/outtakehistory.js"></script>
+    <script type="text/javascript" src="./js/giftview.js"></script>
+    <script type="text/javascript" src="./js/grouptarget.js"></script>
+     <script type="text/javascript" src="./js/organisation-info.js"></script>
+    <script type="text/javascript" src="./js/stock-gift.js"></script>
+    <script type="text/javascript" src="./js/viewinventorylist.js"></script>
+    <script type="text/javascript" src="./js/machineidentification.js"></script>
+    <script type="text/javascript" src="./js/promotions.js"></script>
+    <script type="text/javascript" src="./js/suspension.js"></script>
+    <script type="text/javascript" src="./js/termination.js"></script>
+    <script type="text/javascript" src="./js/userregistration.js"></script>
+    <script type="text/javascript" src="./js/permissionsetting.js"></script>
+    <script type="text/javascript" src="./js/stockledgerview.js"></script>
+    <script type="text/javascript" src="./js/itemregistration.js"></script>
+    <script type="text/javascript" src="./js/branchsetup.js"></script>
+    <script type="text/javascript" src="./js/level.js"></script>
+    <script type="text/javascript" src="./js/department.js"></script>
+    <script type="text/javascript" src="./js/profile.js"></script>
+    <script type="text/javascript" src="./js/groupname.js"></script>
+    <script type="text/javascript" src="./js/leave.js"></script>
+    <script type="text/javascript" src="./js/query.js"></script>
+    <script type="text/javascript" src="./js/warning.js"></script>
+    <script type="text/javascript" src="./js/addglaccount.js"></script>
+    <script type="text/javascript" src="./js/viewglaccounts.js"></script>
+    <script type="text/javascript" src="./js/addgltransaction.js"></script>
+    <script type="text/javascript" src="./js/itemtype.js"></script>
+    <script type="text/javascript" src="./js/intake.js"></script>
+    <script type="text/javascript" src="./js/outtake.js"></script>
+    <script type="text/javascript" src="./js/supplier.js"></script>
+    <script type="text/javascript" src="./js/viewglaccounthistory.js"></script>
+    <script type="text/javascript" src="./js/viewtrialbalancereport.js"></script>
+    <script type="text/javascript" src="./js/viewincomestatementreport.js"></script>
+    <script type="text/javascript" src="./js/personalstaffsalaryrecord.js"></script>
+    <script type="text/javascript" src="./js/viewmonthlysalaryschedule.js"></script>
+    <script type="text/javascript" src="./js/presalaryapproval.js"></script>
+    <script type="text/javascript" src="./js/confirmsalary.js"></script>
+    <script type="text/javascript" src="./js/viewbalancesheet.js"></script>
+    <script type="text/javascript" src="./js/adminpanel.js"></script>
+    <script type="text/javascript" src="./js/useractivitylog.js"></script>
+    <script type="text/javascript" src="./js/stock-return.js"></script>
+    <script type="text/javascript" src="./js/personnel.js"></script>
+    <script type="text/javascript" src="./js/guarantor.js"></script>
+    <script type="text/javascript" src="./js/employerrecord.js"></script>
+    <script type="text/javascript" src="./js/confirmbookletrenewalandreplacement.js"></script>
+    <script type="text/javascript" src="./js/renewalreplacementofbooklet.js"></script>
+    <script type="text/javascript" src="./js/registrationpoint.js"></script>
+    <script type="text/javascript" src="./js/branchselection.js"></script>
+    <script type="text/javascript" src="./js/serialnumbercheck.js"></script>
+    <script type="text/javascript" src="./js/stockstatusreport.js"></script>
+    <script type="text/javascript" src="./js/viewpersonnel.js"></script>
+    <script type="text/javascript" src="./js/referees.js"></script>
+    <script type="text/javascript" src="./js/qualificationn.js"></script>
+    <script type="text/javascript" src="./js/approvepersonnel.js"></script>
+    <script type="text/javascript" src="./js/stockinhistory.js"></script>
+    <script type="text/javascript" src="./js/registrationslipno.js"></script>
+    <script type="text/javascript" src="./js/marketerstarget.js"></script>
+    <script type="text/javascript" src="./js/programrejectedtransactiondate.js"></script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

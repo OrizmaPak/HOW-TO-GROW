@@ -1,0 +1,5 @@
+Options -Indexes
+
+# RewriteRule ^login$ login.php [L]
+
+# RewriteRule ^index$ index.php [L]

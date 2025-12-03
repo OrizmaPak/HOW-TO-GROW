@@ -1,0 +1,57 @@
+<?php
+session_start();
+
+$displayhtml .= '<div class="orecontainer">';
+$displayhtml .= '<div class="oresubcontianer">';
+$displayhtml .= '<div class="oremainheadercontainer">';
+$displayhtml .= '<p class="oremainheader">CUSTOMER PROFILE IMAGES</p>';
+$displayhtml .= '</div>';
+$displayhtml .= '';
+$displayhtml .= '<div class="orecardcontainer">';
+$displayhtml .= '<div class="stcnsection1">';
+$displayhtml .= '<div class="stcs1a"></div>';
+$displayhtml .= '<div class="stcs1a">';
+$displayhtml .= '<div class="stcnsection1">';
+$displayhtml .= '<div class="stcs1a">';
+$displayhtml .= '<div class="inputcontainermsn icsn">';
+$displayhtml .= '<p class="normaltext">Enter Account Number</p>';
+$displayhtml .= '<input type="text">';
+$displayhtml .= '</div>';
+$displayhtml .= '</div>';
+$displayhtml .= '<div class="stcs1a">';
+$displayhtml .= '<div class="oretwobtncontainer">';
+$displayhtml .= '<div class="orewrbtn">Browse pic</div>';
+$displayhtml .= '<div class="orewrbtn">Browse sig</div>';
+$displayhtml .= '</div>';
+$displayhtml .= '</div>';
+$displayhtml .= '</div>';
+$displayhtml .= '</div>';
+$displayhtml .= '</div>';
+$displayhtml .= '<div class="stcnsection1">';
+$displayhtml .= '<div class="stcs1a">';
+$displayhtml .= '<div class="cpilside">';
+$displayhtml .= '<div class="cpiscreenone">';
+$displayhtml .= '';
+$displayhtml .= '</div>';
+$displayhtml .= '<div class="oretwobtncontainer">';
+$displayhtml .= '<div class="orewrbtn">Update pic</div>';
+$displayhtml .= '<div class="orewrbtn">Search</div>';
+$displayhtml .= '</div>';
+$displayhtml .= '</div>';
+$displayhtml .= '</div>';
+$displayhtml .= '<div class="stcs1a bgred shiftup">';
+$displayhtml .= '<div class="cpiprofileholder">';
+$displayhtml .= '<p class="oresubheader">Current Profile</p>';
+$displayhtml .= '<div class="cpiprofilecontainer">';
+$displayhtml .= '<div class="cpiscreenone"></div>';
+$displayhtml .= '<p class="normaltext">Current Signature</p>';
+$displayhtml .= '<div class="cpiscreenone"></div>';
+$displayhtml .= '</div>';
+$displayhtml .= '</div>';
+$displayhtml .= '</div>';
+$displayhtml .= '</div>';
+$displayhtml .= '</div>';
+$displayhtml .= '</div>';
+
+echo  $displayhtml;
+?>
