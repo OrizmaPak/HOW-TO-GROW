@@ -1,5 +1,6 @@
 // statement of account  --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-var form; var accountstatements; datasource = []; balancebb = 0; statementofaccountusers;
+var form; var accountstatements; datasource = []; balancebb = 0; 
+let statementofaccountusers;
 let excessfundid
 let thetotalstatement
 
