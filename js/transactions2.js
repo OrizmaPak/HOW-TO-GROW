@@ -580,7 +580,7 @@ function statementOfAccountsetCurrentPage(pageNum) {
 }
 
 async function appendStatementOfAccountTableRows(item, index) {
-    let user = statementofaccountusers.find(val => val.email == item.savingsaccount.user);
+    // let user = statementofaccountusers.find(val => val.email == item.savingsaccount.user);
     
     if(item.savingsproductname == 'EXCESS CASH'){
         document.getElementById('otherinfo').classList.remove('hidden')
