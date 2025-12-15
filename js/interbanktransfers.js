@@ -9,7 +9,10 @@ async function openInterbankTransfer() {
             if(form.querySelector('button#export-it')) form.querySelector('button#export-it').addEventListener('click', exportInterbanktransferTable)
             if(document.getElementById('submitforapproval'))document.getElementById('submitforapproval').addEventListener('click', submitinterbankforapproval)
             if(document.getElementById('submitfordisapproval'))document.getElementById('submitfordisapproval').addEventListener('click', submitinterbankfordisapproval)
-            if(document.getElementById('submitforfreezeall'))document.getElementById('submitforfreezeall').addEventListener('click', submitinterbankforfreezeall)
+            if(document.getElementById('submitforfreezeall')){
+                document.getElementById('submitforfreezeall').style.display = canFreezeInterbank() ? '' : 'none';
+                document.getElementById('submitforfreezeall').addEventListener('click', submitinterbankforfreezeall)
+            }
             if(document.getElementById('selectall'))document.getElementById('selectall').addEventListener('click', e=>{
                 // Only select visible checkboxes (not hidden ones)
                 const checkboxes = document.getElementsByName('selectot');
@@ -91,6 +94,12 @@ async function submitinterbankforapproval() {
     }
 }
 
+function canFreezeInterbank() {
+    const role = document.getElementById('sessionrole')?.value;
+    const permissions = document.getElementById('sessionpermission')?.value || '';
+    return role === 'SUPERADMIN' || permissions.includes('FREEZE INTERBANK TRANSFER');
+}
+
 
 async function submitinterbankfordisapproval() {
     // Check if any transfer is selected
@@ -155,6 +164,7 @@ async function submitinterbankfordisapproval() {
 async function submitinterbankforfreezeall() {
     const selectElements = document.getElementsByName('selectot');
     if (selectElements.length < 1) return Swal.fire('No Transfer Selected', '', 'warning');
+    if (!canFreezeInterbank()) return Swal.fire('Permission denied', 'You cannot freeze transfers.', 'error');
 
     const selectedTransfers = [];
     for (let i = 0; i < selectElements.length; i++) {
@@ -305,15 +315,15 @@ function viewInterbanktransfersetCurrentPage (pageNum){
 }
 
 async function appendInterbanktransfersTableRows(item, index) {
-     // Check if checkbox should be hidden (case-insensitive, trimmed)
+     // Keep existing hide rules for checkboxes/actions when locked
      const status = String(item.transactionstatus || '').trim().toUpperCase();
-     const isLocked = status === 'SUCCESS' || status === 'PROCESSING';
-     const checkboxHiddenClass = isLocked ? 'hidden' : '';
+     const hiddenClass = status === 'SUCCESS' || status === 'PROCESSING' ? 'hidden' : '';
+     const canFreeze = canFreezeInterbank();
      
      jtabledata.innerHTML += `
         <tr class="source-row-item">
             <td>${index + 1}</td>
-            <td><input class="${checkboxHiddenClass}" type="checkbox" name="selectot" id="check_${item.id}" /></td>
+            <td><input class="${hiddenClass}" type="checkbox" name="selectot" id="check_${item.id}" /></td>
             <td>${item.source}</td>
             <td>${item.currency}</td>
             <td>${item.bankname}</td>
@@ -328,11 +338,11 @@ async function appendInterbanktransfersTableRows(item, index) {
             <td>${item.localreference}</td>
             <td style="text-align:left">${formatMoney(item.amount)}</td>
             <td class="no-pr">
-                <div  style="align-items:center;display: ${item.authorisation == 'APPROVED' ? 'flex': 'none'};display: flex;gap: 10px" class="flex no-pr">
-                    <button ${item.transactionstatus == 'PENDING' || isLocked ? 'disabled': ''} style="padding: 5px 6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:${isLocked ? '#9ca3af' : 'green'};border-radius:3px; display: ${item.transactionstatus == 'PENDING' ? 'none': 'block'}" value="${index}" onclick="payInterbankTransfer(${index})">Pay</button>
-                    <button ${isLocked ? 'disabled': ''} style="padding: 5px 6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:${isLocked ? '#9ca3af' : 'tomato'};border-radius:3px;" value="${index}" onclick="cancelInterbankTransfer(${index})">Cancel</button>
-                    <button ${isLocked ? 'disabled': ''} style="padding: 5px 6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:${isLocked ? '#9ca3af' : '#6b21a8'};border-radius:3px;" value="${index}" onclick="freezeInterbankTransfer(${index})">Freeze</button>
+                <div  style="align-items:center;display: ${item.authorisation == 'APPROVED' ? 'flex': 'none'};display: flex;gap: 10px" class="flex no-pr  ${hiddenClass}">
+                    <button ${item.transactionstatus == 'PENDING' ? 'disabled': ''} style="padding: 5px 6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:green;border-radius:3px; display: ${item.transactionstatus == 'PENDING' ? 'none': 'block'}" value="${index}" onclick="payInterbankTransfer(${index})">Pay</button>
+                    <button style="padding: 5px 6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:tomato;border-radius:3px;" value="${index}" onclick="cancelInterbankTransfer(${index})">Cancel</button>
                 </div>
+                <button style="padding: 5px 6px;margin-top:6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:#6b21a8;border-radius:3px;display:${canFreeze ? 'inline-flex' : 'none'}" value="${index}" onclick="freezeInterbankTransfer(${index})">Freeze</button>
             </td>
         </tr>
     `
@@ -421,6 +431,7 @@ async function freezeInterbankTransfer(index) {
     const selecteditem = interbanktransfers[index];
 
     if (!selecteditem) return;
+    if (!canFreezeInterbank()) return;
 
     const confirmation = await Swal.fire({
         title: 'Freeze transfer?',
