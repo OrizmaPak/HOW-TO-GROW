@@ -764,11 +764,6 @@ $_SESSION["email"] = $_SESSION["htguseremail"];
                         <p>Statement of Account</p>
                         <img src="../images/item.png" alt="">
                     </div>
-                    <div style="font-family: 'Roboto' !important" id='customerbalances' name="navtransactions"
-                        class="navleftsubitem">
-                        <p>Customer Balances</p>
-                        <img src="../images/item.png" alt="">
-                    </div>
                     <div style="font-family: 'Roboto' !important" id='collections' name="navtransactions"
                         class="navleftsubitem">
                         <p>Collections</p>
@@ -969,6 +964,11 @@ $_SESSION["email"] = $_SESSION["htguseremail"];
                         class="navleftsubitem ttesstt">
                         <p>Statement In Daily Detail</p>
                         <img src="../images/monitor.png" alt="">
+                    </div>
+                    <div style="font-family: 'Roboto' !important" id='customerbalances' name="navtransactions"
+                        class="navleftsubitem">
+                        <p>Customer Balances</p>
+                        <img src="../images/item.png" alt="">
                     </div>
                     
                     <div style="font-family: 'Roboto' !important" id="navbalancebf" class="navleftitem navdropper">
