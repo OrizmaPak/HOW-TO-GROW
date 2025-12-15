@@ -342,7 +342,7 @@ async function appendInterbanktransfersTableRows(item, index) {
                     <button ${item.transactionstatus == 'PENDING' ? 'disabled': ''} style="padding: 5px 6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:green;border-radius:3px; display: ${item.transactionstatus == 'PENDING' ? 'none': 'block'}" value="${index}" onclick="payInterbankTransfer(${index})">Pay</button>
                     <button style="padding: 5px 6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:tomato;border-radius:3px;" value="${index}" onclick="cancelInterbankTransfer(${index})">Cancel</button>
                 </div>
-                <button class="${hiddenClass}" style="padding: 5px 6px;margin-top:6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:#6b21a8;border-radius:3px;display:${canFreeze ? 'inline-flex' : 'none'}" value="${index}" onclick="freezeInterbankTransfer(${index})">Freeze</button>
+                <button class="" style="padding: 5px 6px;margin-top:6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:#6b21a8;border-radius:3px;display:${canFreeze ? 'inline-flex' : 'none'}" value="${index}" onclick="freezeInterbankTransfer(${index})">Freeze</button>
             </td>
         </tr>
     `
