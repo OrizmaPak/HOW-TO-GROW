@@ -337,12 +337,14 @@ async function appendInterbanktransfersTableRows(item, index) {
             <td>${item.transactionstatus}</td>
             <td>${item.localreference}</td>
             <td style="text-align:left">${formatMoney(item.amount)}</td>
-            <td class="no-pr">
-                <div  style="align-items:center;display: ${item.authorisation == 'APPROVED' ? 'flex': 'none'};display: flex;gap: 10px" class="flex no-pr  ${hiddenClass}">
-                    <button ${item.transactionstatus == 'PENDING' ? 'disabled': ''} style="padding: 5px 6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:green;border-radius:3px; display: ${item.transactionstatus == 'PENDING' ? 'none': 'block'}" value="${index}" onclick="payInterbankTransfer(${index})">Pay</button>
-                    <button style="padding: 5px 6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:tomato;border-radius:3px;" value="${index}" onclick="cancelInterbankTransfer(${index})">Cancel</button>
+            <td class="no-pr" style="white-space:nowrap">
+                <div style="display:inline-flex;align-items:center;gap:10px">
+                    <div style="display:inline-flex;align-items:center;gap:10px;visibility:${item.authorisation == 'APPROVED' ? 'visible': 'hidden'}" class="no-pr ${hiddenClass}">
+                        <button ${item.transactionstatus == 'PENDING' ? 'disabled': ''} style="padding:5px 6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:green;border-radius:3px;display:${item.transactionstatus == 'PENDING' ? 'none': 'inline-block'}" value="${index}" onclick="payInterbankTransfer(${index})">Pay</button>
+                        <button style="padding:5px 6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:tomato;border-radius:3px" value="${index}" onclick="cancelInterbankTransfer(${index})">Cancel</button>
+                    </div>
+                    <button style="padding:5px 6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:#6b21a8;border-radius:3px;display:${canFreeze ? 'inline-block' : 'none'}" value="${index}" onclick="freezeInterbankTransfer(${index})">Freeze</button>
                 </div>
-                <button class="" style="padding: 5px 6px;margin-top:6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:#6b21a8;border-radius:3px;display:${canFreeze ? 'inline-flex' : 'none'}" value="${index}" onclick="freezeInterbankTransfer(${index})">Freeze</button>
             </td>
         </tr>
     `
