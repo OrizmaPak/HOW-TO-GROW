@@ -9,6 +9,7 @@ async function openInterbankTransfer() {
             if(form.querySelector('button#export-it')) form.querySelector('button#export-it').addEventListener('click', exportInterbanktransferTable)
             if(document.getElementById('submitforapproval'))document.getElementById('submitforapproval').addEventListener('click', submitinterbankforapproval)
             if(document.getElementById('submitfordisapproval'))document.getElementById('submitfordisapproval').addEventListener('click', submitinterbankfordisapproval)
+            if(document.getElementById('submitforfreezeall'))document.getElementById('submitforfreezeall').addEventListener('click', submitinterbankforfreezeall)
             if(document.getElementById('selectall'))document.getElementById('selectall').addEventListener('click', e=>{
                 // Only select visible checkboxes (not hidden ones)
                 const checkboxes = document.getElementsByName('selectot');
@@ -151,6 +152,55 @@ async function submitinterbankfordisapproval() {
     }
 }
 
+async function submitinterbankforfreezeall() {
+    const selectElements = document.getElementsByName('selectot');
+    if (selectElements.length < 1) return Swal.fire('No Transfer Selected', '', 'warning');
+
+    const selectedTransfers = [];
+    for (let i = 0; i < selectElements.length; i++) {
+        if (selectElements[i].checked) {
+            const transferId = selectElements[i].id.split('_')[1];
+            selectedTransfers.push(transferId);
+        }
+    }
+
+    if (!selectedTransfers.length) return Swal.fire('No Transfer Selected', '', 'warning');
+
+    const confirmation = await Swal.fire({
+        title: 'Freeze transfers?',
+        text: 'Do you want to freeze the selected transfer(s)?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, freeze',
+        cancelButtonText: 'No, keep active',
+    });
+
+    if (!confirmation.isConfirmed) return;
+
+    try {
+        const paramstr = new FormData();
+        selectedTransfers.forEach((id, idx) => paramstr.append(`id${idx + 1}`, id));
+        paramstr.append('rowsize', selectedTransfers.length);
+
+        const response = await httpJsonRequest('../controllers/freezeinterbanktransaction.php', 'POST', paramstr);
+
+        if (response) {
+            const res = JSON.parse(JSON.stringify(response));
+            if (res.status) {
+                Swal.fire('Frozen', res.message || 'Selected transfers have been frozen.', 'success');
+            } else {
+                Swal.fire('Error', res.message || 'Unable to freeze selected transfers.', 'error');
+            }
+            generateInterbanktransferTable();
+            form.querySelector('button#submit').click();
+        }
+    } catch (error) {
+        console.error('Error freezing transfers:', error);
+        Swal.fire('Error', 'An unexpected error occurred.', 'error');
+        form.querySelector('button#submit').click();
+    }
+}
+
 function updateInterbankTransferTotals() {
     const totalsBar = document.getElementById('interbank-totals');
     const totalCountEl = document.getElementById('interbank-total-count');
@@ -281,6 +331,7 @@ async function appendInterbanktransfersTableRows(item, index) {
                 <div  style="align-items:center;display: ${item.authorisation == 'APPROVED' ? 'flex': 'none'};display: flex;gap: 10px" class="flex no-pr  ${hiddenClass}">
                     <button ${item.transactionstatus == 'PENDING' ? 'disabled': ''} style="padding: 5px 6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:green;border-radius:3px; display: ${item.transactionstatus == 'PENDING' ? 'none': 'block'}" value="${index}" onclick="payInterbankTransfer(${index})">Pay</button>
                     <button style="padding: 5px 6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:tomato;border-radius:3px;" value="${index}" onclick="cancelInterbankTransfer(${index})">Cancel</button>
+                    <button style="padding: 5px 6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:#6b21a8;border-radius:3px;" value="${index}" onclick="freezeInterbankTransfer(${index})">Freeze</button>
                 </div>
             </td>
         </tr>
@@ -363,6 +414,45 @@ async function cancelInterbankTransfer(index) {
                     form.querySelector('button#submit').click();
             }
         }
+    }
+}
+
+async function freezeInterbankTransfer(index) {
+    const selecteditem = interbanktransfers[index];
+
+    if (!selecteditem) return;
+
+    const confirmation = await Swal.fire({
+        title: 'Freeze transfer?',
+        text: 'Do you want to freeze this transfer?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#6b21a8',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, freeze it',
+        cancelButtonText: 'No, keep it'
+    });
+
+    if (!confirmation.isConfirmed) return;
+
+    const paramstr = new FormData();
+    paramstr.append('rowsize', 1);
+    paramstr.append('id1', selecteditem?.id);
+
+    const result = await httpJsonRequest('../controllers/freezeinterbanktransaction.php', 'POST', paramstr);
+    if (result) {
+        const res = JSON.parse(JSON.stringify(result));
+        if (res.status) {
+            callModal(res.message || 'Transfer frozen successfully', 1);
+            generateInterbanktransferTable();
+            form.querySelector('button#submit').click();
+        } else {
+            callModal(res.message || 'Unable to freeze transfer', 0);
+            form.querySelector('button#submit').click();
+        }
+    } else {
+        callModal('Error: Unable to complete task', 0);
+        form.querySelector('button#submit').click();
     }
 }
 

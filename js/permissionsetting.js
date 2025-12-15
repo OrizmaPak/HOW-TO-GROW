@@ -212,11 +212,12 @@ const permset_otherreportsdata = [
     "INTERBANK TRANSFERS",
     "VIEW RECIPIENTS",
     "VIEW TRANSFERS",
+    "FREEZE INTERBANK TRANSFER",
     'VIEW RETURN CASH TRANSACTION',
-  'VIEW EDITED SERVICE CHARGE',
-  'VIEW CASH',
-  'SUBMITTED ERRORS',
-  'GROUP SYSTEM CASH ANALYSES',
+   'VIEW EDITED SERVICE CHARGE',
+   'VIEW CASH',
+   'SUBMITTED ERRORS',
+   'GROUP SYSTEM CASH ANALYSES',
   'CONSOLIDATE REPORTS'
     ];
      
@@ -466,4 +467,3 @@ async function permissionsetting() {
 
 var orepermissionsetting = document.getElementById("permissionsetting");
 if (orepermissionsetting) orepermissionsetting.addEventListener("click", e=>permissionsetting());
-
