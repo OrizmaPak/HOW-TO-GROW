@@ -317,12 +317,8 @@ function viewInterbanktransfersetCurrentPage (pageNum){
 async function appendInterbanktransfersTableRows(item, index) {
      // Keep existing hide rules for checkboxes/actions when locked
      const status = String(item.transactionstatus || '').trim().toUpperCase();
-     const isLocked = status === 'SUCCESS' || status === 'PROCESSING';
-     const hiddenClass = isLocked ? 'hidden' : '';
+     const hiddenClass = status === 'SUCCESS' || status === 'PROCESSING' ? 'hidden' : '';
      const canFreeze = canFreezeInterbank();
-     const showPayCancel = item.authorisation == 'APPROVED' && !isLocked;
-     const showFreeze = canFreeze && !isLocked;
-     const showActionRow = showPayCancel || showFreeze;
      
      jtabledata.innerHTML += `
         <tr class="source-row-item">
@@ -342,10 +338,10 @@ async function appendInterbanktransfersTableRows(item, index) {
             <td>${item.localreference}</td>
             <td style="text-align:left">${formatMoney(item.amount)}</td>
             <td class="no-pr">
-                <div style="align-items:center;display:${showActionRow ? 'flex' : 'none'};gap:8px;flex-wrap:nowrap" class="flex no-pr">
-                    <button ${item.transactionstatus == 'PENDING' || !showPayCancel ? 'disabled': ''} style="padding: 5px 6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:green;border-radius:3px; display: ${item.transactionstatus == 'PENDING' || !showPayCancel ? 'none': 'block'}" value="${index}" onclick="payInterbankTransfer(${index})">Pay</button>
-                    <button style="padding: 5px 6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:tomato;border-radius:3px; display:${showPayCancel ? 'inline-flex' : 'none'}" value="${index}" onclick="cancelInterbankTransfer(${index})">Cancel</button>
-                    <button style="padding: 5px 6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:#6b21a8;border-radius:3px; display:${showFreeze ? 'inline-flex' : 'none'}" value="${index}" onclick="freezeInterbankTransfer(${index})">Freeze</button>
+                <div  style="align-items:center;display: ${item.authorisation == 'APPROVED' ? 'flex': 'none'};gap: 8px;flex-wrap:nowrap" class="flex no-pr ${hiddenClass}">
+                    <button ${item.transactionstatus == 'PENDING' ? 'disabled': ''} style="padding: 5px 6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:green;border-radius:3px; display: ${item.transactionstatus == 'PENDING' ? 'none': 'block'}" value="${index}" onclick="payInterbankTransfer(${index})">Pay</button>
+                    <button style="padding: 5px 6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:tomato;border-radius:3px;" value="${index}" onclick="cancelInterbankTransfer(${index})">Cancel</button>
+                    <button style="padding: 5px 6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:#6b21a8;border-radius:3px;display:${canFreeze ? 'inline-flex' : 'none'}" value="${index}" onclick="freezeInterbankTransfer(${index})">Freeze</button>
                 </div>
             </td>
         </tr>
