@@ -6949,6 +6949,80 @@ async function fetchReturnedCashReportLocations() {
 var returnedcashreportbtn = document.getElementById('returnedcashreport')
 if(returnedcashreportbtn) returnedcashreportbtn.addEventListener('click', openReturnedCashReport)
 
+// Customer Balances --------------------------------------------------------------------------------------------------------------------------------------
+let customerBalancesLocations = [];
+
+async function openCustomerBalances() {
+    await httpRequest('customerbalances.php');
+    form = document.getElementById('customerbalancesform');
+
+    if (form) {
+        setCustomerBalancesDefaults();
+        await fetchCustomerBalancesLocations();
+
+        const submitBtn = form.querySelector('button#submit');
+        if (submitBtn) submitBtn.addEventListener('click', submitCustomerBalances);
+    }
+}
+
+function setCustomerBalancesDefaults() {
+    const now = new Date();
+    const yearInput = document.getElementById('year');
+    const monthSelect = document.getElementById('month');
+
+    if (yearInput && !yearInput.value) yearInput.value = now.getFullYear();
+    if (monthSelect && !monthSelect.value) monthSelect.value = now.getMonth() + 1;
+}
+
+async function fetchCustomerBalancesLocations() {
+    showSpinner();
+    try {
+        const result = await fetch('../controllers/fetchlocation.php', { method: 'POST', body: {}, headers: new Headers() });
+        const res = await result.json();
+        if (res?.status) {
+            customerBalancesLocations = res.data?.data || [];
+            const select = document.querySelector('#location');
+            if (select) {
+                let options = '<option value=\"\">--Select Location --</option>';
+                customerBalancesLocations.forEach(item => {
+                    options += `<option value=\"${item.id}\"> ${item.location} </option>`;
+                });
+                select.innerHTML = options;
+
+                const sessionLocation = document.getElementById('sessionlocation')?.value;
+                if (sessionLocation) select.value = sessionLocation;
+            }
+        }
+    } catch (err) {
+        console.error(err);
+    } finally {
+        hideSpinner();
+    }
+}
+
+function submitCustomerBalances(event) {
+    event.preventDefault();
+    const submitBtn = event.target;
+    submitBtn.disabled = true;
+
+    const params = new URLSearchParams();
+    const locationVal = form.querySelector('#location')?.value;
+    const yearVal = form.querySelector('#year')?.value;
+    const monthVal = form.querySelector('#month')?.value;
+
+    if (locationVal) params.append('location', locationVal);
+    if (yearVal) params.append('year', yearVal);
+    if (monthVal) params.append('month', monthVal);
+
+    const url = `https://htg.com.ng/howtogrow/api/customerbalancesdump${params.toString() ? '?' + params.toString() : ''}`;
+    window.open(url, '_blank');
+
+    submitBtn.disabled = false;
+}
+
+const customerbalancesbtn = document.getElementById('customerbalances');
+if (customerbalancesbtn) customerbalancesbtn.addEventListener('click', openCustomerBalances, false);
+
 // Transfer Cash to Bank --------------------------------------------------------------------------------------------------------------------------------------
 async function opentransfercashtobank(){
     await httpRequest('transfercashtobank.php')
