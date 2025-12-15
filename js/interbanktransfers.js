@@ -339,7 +339,7 @@ async function appendInterbanktransfersTableRows(item, index) {
             <td style="text-align:left">${formatMoney(item.amount)}</td>
             <td class="no-pr" style="white-space:nowrap">
                 <div style="display:inline-flex;align-items:center;gap:10px">
-                    <div style="display:inline-flex;align-items:center;gap:10px;visibility:${item.authorisation == 'APPROVED' ? 'visible': 'hidden'}" class="no-pr ${hiddenClass}">
+                    <div style="align-items:center;display: ${item.authorisation == 'APPROVED' ? 'flex': 'none'};display: flex;gap: 10px" class="flex no-pr  ${hiddenClass}">
                         <button ${item.transactionstatus == 'PENDING' ? 'disabled': ''} style="padding:5px 6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:green;border-radius:3px;display:${item.transactionstatus == 'PENDING' ? 'none': 'inline-block'}" value="${index}" onclick="payInterbankTransfer(${index})">Pay</button>
                         <button style="padding:5px 6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:tomato;border-radius:3px" value="${index}" onclick="cancelInterbankTransfer(${index})">Cancel</button>
                     </div>
