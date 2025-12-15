@@ -307,13 +307,13 @@ function viewInterbanktransfersetCurrentPage (pageNum){
 async function appendInterbanktransfersTableRows(item, index) {
      // Check if checkbox should be hidden (case-insensitive, trimmed)
      const status = String(item.transactionstatus || '').trim().toUpperCase();
-     const shouldHide = status === 'SUCCESS' || status === 'PROCESSING';
-     const hiddenClass = shouldHide ? 'hidden' : '';
+     const isLocked = status === 'SUCCESS' || status === 'PROCESSING';
+     const checkboxHiddenClass = isLocked ? 'hidden' : '';
      
      jtabledata.innerHTML += `
         <tr class="source-row-item">
             <td>${index + 1}</td>
-            <td><input class="${hiddenClass}" type="checkbox" name="selectot" id="check_${item.id}" /></td>
+            <td><input class="${checkboxHiddenClass}" type="checkbox" name="selectot" id="check_${item.id}" /></td>
             <td>${item.source}</td>
             <td>${item.currency}</td>
             <td>${item.bankname}</td>
@@ -328,10 +328,10 @@ async function appendInterbanktransfersTableRows(item, index) {
             <td>${item.localreference}</td>
             <td style="text-align:left">${formatMoney(item.amount)}</td>
             <td class="no-pr">
-                <div  style="align-items:center;display: ${item.authorisation == 'APPROVED' ? 'flex': 'none'};display: flex;gap: 10px" class="flex no-pr  ${hiddenClass}">
-                    <button ${item.transactionstatus == 'PENDING' ? 'disabled': ''} style="padding: 5px 6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:green;border-radius:3px; display: ${item.transactionstatus == 'PENDING' ? 'none': 'block'}" value="${index}" onclick="payInterbankTransfer(${index})">Pay</button>
-                    <button style="padding: 5px 6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:tomato;border-radius:3px;" value="${index}" onclick="cancelInterbankTransfer(${index})">Cancel</button>
-                    <button style="padding: 5px 6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:#6b21a8;border-radius:3px;" value="${index}" onclick="freezeInterbankTransfer(${index})">Freeze</button>
+                <div  style="align-items:center;display: ${item.authorisation == 'APPROVED' ? 'flex': 'none'};display: flex;gap: 10px" class="flex no-pr">
+                    <button ${item.transactionstatus == 'PENDING' || isLocked ? 'disabled': ''} style="padding: 5px 6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:${isLocked ? '#9ca3af' : 'green'};border-radius:3px; display: ${item.transactionstatus == 'PENDING' ? 'none': 'block'}" value="${index}" onclick="payInterbankTransfer(${index})">Pay</button>
+                    <button ${isLocked ? 'disabled': ''} style="padding: 5px 6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:${isLocked ? '#9ca3af' : 'tomato'};border-radius:3px;" value="${index}" onclick="cancelInterbankTransfer(${index})">Cancel</button>
+                    <button ${isLocked ? 'disabled': ''} style="padding: 5px 6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:${isLocked ? '#9ca3af' : '#6b21a8'};border-radius:3px;" value="${index}" onclick="freezeInterbankTransfer(${index})">Freeze</button>
                 </div>
             </td>
         </tr>
