@@ -1,0 +1,11 @@
+permset_propertydata	23
+permset_savingsdata	8
+permset_transactionsdata	38
+permset_otherreportsdata	27
+permset_loansdata	14
+permset_customerdata	3
+permset_activatedata	0
+permset_administrationdata	27
+permset_PersonnelPayrolldata	25
+permset_inventorydata	17
+permset_accountsdata	17

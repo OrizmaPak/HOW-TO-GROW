@@ -1,0 +1,193 @@
+navleftitems	Dashboard
+maindashboardd	Dashboard
+branchsetup	Register branch
+branchselection	Branch Selection
+userregistration	Register user
+viewmfa	MFA Logs
+organisation-info	Organisation info
+adminpanel	Admin panel
+useractivitylog	user activity logs
+permissionsetting	Permission setting
+machineidentification	Machine Identification
+marketerstarget	Marketers Target
+grouptarget	Group Target
+programrejectedtransactiondate	Reject Transaction Date
+profile	My Profile
+renewalreplacementofbooklet	Booklet Renewal/Replacement
+approvebooklets	Approve Booklets
+confirmbookletrenewalandreplacement	Confirm/Collect Booklet
+serialnumbercheck	Serial Number Look ups/Complaints
+registrationslipno	Review Serial Numbers
+supplybooklets	Supply Booklet
+bookletstockhistory	Booklet Stock History
+registrationpoint	Registration Point
+scheduleroster	Task Schedule
+viewscheduleroster	View Task Schedule
+cashierlimit	Cashier Limit
+commissioncategories	Commission Categories
+marketerregistrationsandrenewals	Marketers Registrations & Renewals
+adjustcollectionsettings	Collections Settings
+collectionapprovalsettingsnet	Collection Approval Settings (NET)
+itemtype	Item Type
+itemregistration	Register Inventory
+viewinventorylist	View Inventory List
+approveinventory	Approve Inventory
+supplier	supplier / Customer
+intake	Intake/Stock Control
+stockinhistory	Intake History
+stockledgerview	Stock Ledger
+outtake	Outtake
+outtakehistory	Outtake History
+stock-return	Return
+stockreturnview	Return View
+stock-gift	Gifts
+giftview	Gifts View
+stockstatusreport	Stock Status Report
+withdrawalviewbalance	Withdrawal View Balance
+archiveinventory	View Archive Inventory List
+consumablewithdrawaltransaction	Consumable Withdrawal Transaction
+nonconsumablewithdrawaltransaction	Non-Consumable Withdrawal Transaction
+customeraccount	Register Customer Account
+approvecustomer	Approve Customer Update
+viewcustomers	View Customers
+savingsproducts	Savings Product
+savingsaccountsproducts	Savings Account Products
+savingsaccount	Add Savings Accounts
+viewsavingsaccount	View Savings Accounts
+savingstransactions	Savings Transactions
+savingsdepositanalysis	Savings Deposit Analysis
+transfersavings	Local Transfer
+viewtransferswithin	View Transfers
+buildpropertyitems	Build Property Items
+categoryvaluetimeline	Category Value Timeline
+propertyaccount	Add Property Account
+viewcompositeitems	View Composite Items
+viewpropertyaccounts	View Property Accounts
+maturedproperrtyaccounts	Matured Property Accounts
+missedmaturity	Missed Maturity
+propertytransactionreport	Property Transaction Report
+propertydelivery	Property Delivery
+viewdelivery	View Delivery
+propertymarkupreport	Property Markup Report
+reversedelivery	Reverse Delivery
+approvereversedelivery	Approve Reversed Delivery
+viewdeletedreversedelivery	View Reversed Delivery
+propertystockout	Property Stock Outtake Report
+propertydepositanalysis	Property Deposit Analysis
+propertydepositstatus	Property Deposit Status
+propertycommissions	Property Commissions
+propertyledger	Property Ledger
+viewreservedpropertystock	View Reserved Property Stock
+viewpropertyitemnotinstock	View Property Item Not In Stock
+propertystatementofaccount	Property Statement of Account
+addloanfee	Add Loan Fees
+loanproducts	Loan Products
+loanaccount	Add Loan Account
+viewloans	View Loans
+collateral	Add Collateral
+approveloans	Approve Loan
+activeloan	View Active Loans
+dueloan	Due Loans
+missedrepaymentloans	Missed Repayments
+pastmaturitydateloans	Past Maturity Date
+norepaymentloans	No Repayment
+repaymentschedule	Repayment Schedule
+loantransactionreport	Loan Transaction Report
+loanclassificationreport	Loan Classification Report
+statementofaccount	Statement of Account
+collections	Collections
+collectionsview	Collections View
+updatedailyunit	Update Daily Units
+collectionsapproveview	Approved Collections
+collectionsdeclineview	Declined Collections
+withdrawal	Withdrawal
+viewwithdrawals	View Withdrawals
+viewreversedwithdrawals	View Reversed Withdrawals
+approvewithdrawals	Approve Withdrawals
+deposits	Deposit
+viewdeposits	View Deposits
+approvedeposits	Approve Deposits
+groupdeposit	Group Deposit
+viewgroupdeposits	View Group Deposit
+editerrorsindeposit	Edit Deposit
+viewediteddeposits	View Edited Deposit
+viewdeleteddeposits	View Deleted Deposit
+editwithdrawals	Edit Withdrawals
+vieweditedwithdraws	View Edited Withdrawals
+viewdeletedwithdrawals	View Deleted Withdrawals
+dailytransaction	Daily Transactions
+resolveexcessandreturnedcash	Resolve Excess & Returned Cash
+nettransaction	Summary Net Transaction
+netreportupdated	Summary Net Transaction
+branchfundtransfer	branch fund transfer
+viewbranchfundtransfer	view branch fund transfer
+groupsystemcashposition	Group System Cash Position
+excesscashreport	Excess Cash Report
+returnedcashreport	Returned Cash Report
+confirmbalancebroughtforward	Confirm Balance Brought Forward
+counterpostwrongaccountentry	Counter Post Wrong Account Entry
+counterdepositincorrectamountpaid	Counter Deposit Incorrect Amount Paid
+userconfirmtransaction	User Confirm Transaction
+aggregatedbranchdeposits	Aggregated Branch Deposits
+rrrtransactionreport	RRR Transaction Report
+transfercashtobank	Transfer Cash to Bank
+viewtransfercashtobank	View Transfer Cash to Bank
+viewcreditentries	View Credit (Charges) Entries
+statementindailydetail	Statement In Daily Detail
+customerbalances	Customer Balances
+balancebf	add balance
+approvebalancebf	approve balance
+viewbalancebf	view balance
+fetchreversedbalancedeposit	View Reversed Balances
+withdrawalrequest	Withdrawal Request
+processwithdrawalrequest	Process Withdrawal Request
+viewwithdrawalrequest	View Withdrawal Request
+viewrecipients	View Recipients
+approvetransfer	Approve Transfers
+interbanktransfer	Interbank Transfers
+viewaggregate	View Aggregates
+viewtransfers	View Interbank Transfers
+expenditure	Expenditures
+approveexpenditures	Approve Expenditures
+viewexpenditures	View Expenditures
+payments	Payments
+viewpayments	View Payments
+warehousesaless	Warehouse Sales
+viewwarehousesaless	View Warehouse Sales
+approvereversedsales	Approve Warehouse Sales Reversal
+department	Add Department
+level	Add Level
+groupname	Add Group
+personnel	Add Personnel
+approvepersonnel	Approve Personnel
+viewpersonnel	View Personnel
+personnelhistory	Personnel History
+guarantor	Add Guarantor
+employerrecord	Add Employment Record
+referees	Add Referee
+qualificationn	Add Qualification
+parentsguardians	Add Parents/Guardians
+query	query
+promotions	promotions
+termination	Termination/Resignation
+suspension	suspension
+leave	leave
+warning	warning
+monitorevaluation	Monitoring/Evaluation
+advance	Advance
+viewstaffadvance	view Staff Advance
+personalstaffsalaryrecord	Staff Salary Record
+viewmonthlysalaryschedule	View Monthly Salary Schedule
+presalaryapproval	Payroll
+confirmsalary	Approve Payroll
+payrollclassa	Payroll Class A
+payrollclassb	Payroll Class B
+addglaccount	Add GL Account
+viewglaccounts	View GL Accounts
+addgltransaction	Add GL Transaction
+viewglaccounthistory	View GL Transaction History
+viewtrialbalancereport	View Trial Balance
+viewincomestatementreport	View Income Statement
+viewbalancesheet	View Balance Sheet
+searchcreditrating	Search Credit Rating
+navmarker	HOW TO GROW

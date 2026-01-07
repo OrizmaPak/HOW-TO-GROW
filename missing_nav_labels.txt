@@ -1,0 +1,18 @@
+Collection Approval Settings (NET)
+Collections Settings
+Confirm Balance Brought Forward
+Consumable Withdrawal Transaction
+Counter Deposit Incorrect Amount Paid
+Counter Post Wrong Account Entry
+Customer Balances
+Dashboard
+HOW TO GROW
+MFA Logs
+Non-Consumable Withdrawal Transaction
+Payroll Class A
+Payroll Class B
+Property Statement of Account
+User Confirm Transaction
+View Reversed Balances
+View Reversed Withdrawals
+Withdrawal View Balance
