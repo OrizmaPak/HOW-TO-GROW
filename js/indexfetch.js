@@ -725,6 +725,26 @@ const controllNavigationPermissions =(dataa)=>{
         }
     }
     }
+    // hide parent sections (except dashboard) if they have no visible sub-items
+    const parents = document.getElementsByClassName('navleftitem');
+    for(let p = 0; p < parents.length; p++){
+        const parent = parents[p];
+        if(parent.id === 'maindashboardd') continue;
+        const children = document.querySelectorAll(`.navleftsubitem[name="${parent.id}"]`);
+        if(children.length === 0) continue;
+        let hasVisible = false;
+        for(let c = 0; c < children.length; c++){
+            if(!children[c].classList.contains('hidden')){
+                hasVisible = true;
+                break;
+            }
+        }
+        if(hasVisible){
+            parent.classList.remove('hidden');
+        }else{
+            parent.classList.add('hidden');
+        }
+    }
     document.getElementById('navleftitems').style.visibility = 'visible';
 }
 function getindexEmailParams(){
