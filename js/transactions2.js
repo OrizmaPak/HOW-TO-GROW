@@ -824,8 +824,6 @@ async function openstatementindailydetail () {
     document.getElementById('accbal').innerHTML = '';
     event.target.disabled = true;
 
-    const nf = new Intl.NumberFormat('en-NG'); // number formatter
-
     const paramstr = new FormData(form);
     if (!form.accountnumber.value || form.accountnumber.value.length < 1) {
         form.accountnumber.style.borderColor = 'red';
@@ -834,6 +832,39 @@ async function openstatementindailydetail () {
     } else {
         form.accountnumber.style.borderColor = '';
     }
+
+    // Direct fetch flow (temporary replacement).
+    // Only send accountnumber, startdate and enddate.
+    const payload = new FormData();
+    payload.append('accountnumber', form.accountnumber.value);
+    payload.append('startdate', form.startdate.value);
+    payload.append('enddate', form.enddate.value);
+
+    let result2, res2;
+    try {
+        result2 = await fetch('../controllers/statementindetailupdated.php', {
+            method: 'POST',
+            body: payload,
+            headers: new Headers()
+        });
+        res2 = await result2.json();
+    } catch (e) {
+        event.target.disabled = false;
+        Swal.fire({ icon: 'error', title: 'Network Error', text: 'Could not fetch statement. Try again.' });
+        return;
+    }
+
+    event.target.disabled = false;
+    if (res2.status) {
+        renderStatementDetail(res2);
+    } else {
+        if (typeof jtabledata !== 'undefined' && jtabledata) jtabledata.innerHTML = '';
+        callModal(res2.message, 0);
+    }
+    return;
+
+    // Temporarily disabled for rollback: validation + daily-unit modal flow below.
+    const nf = new Intl.NumberFormat('en-NG'); // number formatter
 
     // 🔹 STEP 1: Call first controller to validate daily deposits
     let result1, res1;
@@ -886,10 +917,10 @@ async function openstatementindailydetail () {
             willClose: () => {}
         });
 
-        // Go straight to statementindetail.php
+        // Go straight to statementindetailupdated.php
         let result2, res2;
         try {
-            result2 = await fetch('../controllers/statementindetail.php', {
+            result2 = await fetch('../controllers/statementindetailupdated.php', {
                 method: 'POST',
                 body: paramstr,
                 headers: new Headers()
@@ -1028,10 +1059,10 @@ async function openstatementindailydetail () {
 
             const payload = result.value;
 
-            // 🔹 STEP 2: Call statementindetail.php with filters + edited dailyunits
+            // 🔹 STEP 2: Call statementindetailupdated.php with filters + edited dailyunits
             let result2, res2;
             try {
-                result2 = await fetch('../controllers/statementindetail.php', {
+                result2 = await fetch('../controllers/statementindetailupdated.php', {
                     method: 'POST',
                     body: payload,
                     headers: new Headers()
