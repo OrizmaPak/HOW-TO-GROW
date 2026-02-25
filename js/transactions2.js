@@ -861,29 +861,29 @@ async function openstatementindailydetail () {
         if (typeof jtabledata !== 'undefined' && jtabledata) jtabledata.innerHTML = '';
         callModal(res2.message, 0);
     }
-    return;
-
+    
     // Temporarily disabled for rollback: validation + daily-unit modal flow below.
-    const nf = new Intl.NumberFormat('en-NG'); // number formatter
+    if (false) {
+        const nf = new Intl.NumberFormat('en-NG'); // number formatter
 
-    // 🔹 STEP 1: Call first controller to validate daily deposits
-    let result1, res1;
-    try {
-        result1 = await fetch('../controllers/fetchdepositsfordailydepositvalidation.php', {
-            method: 'POST',
-            body: paramstr,
-            headers: new Headers()
-        });
-        res1 = await result1.json();
-    } catch (e) {
-        event.target.disabled = false;
-        Swal.fire({
-            icon: 'error',
-            title: 'Network Error',
-            text: 'Could not reach the server. Please try again.',
-        });
-        return;
-    }
+        // 🔹 STEP 1: Call first controller to validate daily deposits
+        let result1, res1;
+        try {
+            result1 = await fetch('../controllers/fetchdepositsfordailydepositvalidation.php', {
+                method: 'POST',
+                body: paramstr,
+                headers: new Headers()
+            });
+            res1 = await result1.json();
+        } catch (e) {
+            event.target.disabled = false;
+            Swal.fire({
+                icon: 'error',
+                title: 'Network Error',
+                text: 'Could not reach the server. Please try again.',
+            });
+            return;
+        }
 
     // CASE A: ❌ Error — do not proceed, disable Proceed button
     if (res1 && res1.status === false) {
@@ -1085,13 +1085,14 @@ async function openstatementindailydetail () {
         return;
     }
 
-    // Fallback (shouldn’t hit here often)
-    event.target.disabled = false;
-    Swal.fire({
-        icon: 'warning',
-        title: 'No Data',
-        text: 'No validation data returned. Please try again.',
-    });
+        // Fallback (shouldn’t hit here often)
+        event.target.disabled = false;
+        Swal.fire({
+            icon: 'warning',
+            title: 'No Data',
+            text: 'No validation data returned. Please try again.',
+        });
+    }
 }
 
 
