@@ -824,6 +824,8 @@ async function openstatementindailydetail () {
     document.getElementById('accbal').innerHTML = '';
     event.target.disabled = true;
 
+    const nf = new Intl.NumberFormat('en-NG'); // number formatter
+
     const paramstr = new FormData(form);
     if (!form.accountnumber.value || form.accountnumber.value.length < 1) {
         form.accountnumber.style.borderColor = 'red';
@@ -833,59 +835,26 @@ async function openstatementindailydetail () {
         form.accountnumber.style.borderColor = '';
     }
 
-    // Direct fetch flow (temporary replacement).
-    // Only send accountnumber, startdate and enddate.
-    const payload = new FormData();
-    payload.append('accountnumber', form.accountnumber.value);
-    payload.append('startdate', form.startdate.value);
-    payload.append('enddate', form.enddate.value);
-
-    let result2, res2;
+    // ?? STEP 1: Call first controller to validate daily deposits
+    let result1, res1;
     try {
-        result2 = await fetch('../controllers/statementindetailupdated.php', {
+        result1 = await fetch('../controllers/fetchdepositsfordailydepositvalidation.php', {
             method: 'POST',
-            body: payload,
+            body: paramstr,
             headers: new Headers()
         });
-        res2 = await result2.json();
+        res1 = await result1.json();
     } catch (e) {
         event.target.disabled = false;
-        Swal.fire({ icon: 'error', title: 'Network Error', text: 'Could not fetch statement. Try again.' });
+        Swal.fire({
+            icon: 'error',
+            title: 'Network Error',
+            text: 'Could not reach the server. Please try again.',
+        });
         return;
     }
 
-    event.target.disabled = false;
-    if (res2.status) {
-        renderStatementDetail(res2);
-    } else {
-        if (typeof jtabledata !== 'undefined' && jtabledata) jtabledata.innerHTML = '';
-        callModal(res2.message, 0);
-    }
-    
-    // Temporarily disabled for rollback: validation + daily-unit modal flow below.
-    if (false) {
-        const nf = new Intl.NumberFormat('en-NG'); // number formatter
-
-        // 🔹 STEP 1: Call first controller to validate daily deposits
-        let result1, res1;
-        try {
-            result1 = await fetch('../controllers/fetchdepositsfordailydepositvalidation.php', {
-                method: 'POST',
-                body: paramstr,
-                headers: new Headers()
-            });
-            res1 = await result1.json();
-        } catch (e) {
-            event.target.disabled = false;
-            Swal.fire({
-                icon: 'error',
-                title: 'Network Error',
-                text: 'Could not reach the server. Please try again.',
-            });
-            return;
-        }
-
-    // CASE A: ❌ Error — do not proceed, disable Proceed button
+    // CASE A: ? Error � do not proceed, disable Proceed button
     if (res1 && res1.status === false) {
         await Swal.fire({
             icon: 'error',
@@ -906,21 +875,21 @@ async function openstatementindailydetail () {
         return;
     }
 
-    // CASE B: ✅ Resolved notice — status true but empty data: proceed automatically
+    // CASE B: ? Resolved notice � status true but empty data: proceed automatically
     if (res1 && res1.status === true && Array.isArray(res1.data) && res1.data.length === 0) {
         await Swal.fire({
             icon: 'info',
             title: 'Daily Deposits Resolved',
-            text: res1.message || 'HTG has resolved the daily deposits for this account. Proceeding to statement…',
+            text: res1.message || 'HTG has resolved the daily deposits for this account. Proceeding to statement�',
             timer: 1800,
             showConfirmButton: false,
             willClose: () => {}
         });
 
-        // Go straight to statementindetailupdated.php
+        // Go straight to statementindetail.php
         let result2, res2;
         try {
-            result2 = await fetch('../controllers/statementindetailupdated.php', {
+            result2 = await fetch('../controllers/statementindetail.php', {
                 method: 'POST',
                 body: paramstr,
                 headers: new Headers()
@@ -942,7 +911,7 @@ async function openstatementindailydetail () {
         return;
     }
 
-    // CASE C: 📋 Has rows — show editable table in SweetAlert
+    // CASE C: ?? Has rows � show editable table in SweetAlert
     if (res1 && res1.status === true && Array.isArray(res1.data) && res1.data.length > 0) {
         // Inline modal styles (sticky header + scroll)
         const modalStyles = `
@@ -1040,7 +1009,7 @@ async function openstatementindailydetail () {
                 // Build payload: original filters + rowsize + id1..n, reference1..n, dailyunit1..n
                 const payload = new FormData(form);
 
-                // ✅ include rowsize
+                // ? include rowsize
                 payload.append('rowsize', res1.data.length);
 
                 res1.data.forEach((row, idx) => {
@@ -1059,10 +1028,10 @@ async function openstatementindailydetail () {
 
             const payload = result.value;
 
-            // 🔹 STEP 2: Call statementindetailupdated.php with filters + edited dailyunits
+            // ?? STEP 2: Call statementindetail.php with filters + edited dailyunits
             let result2, res2;
             try {
-                result2 = await fetch('../controllers/statementindetailupdated.php', {
+                result2 = await fetch('../controllers/statementindetail.php', {
                     method: 'POST',
                     body: payload,
                     headers: new Headers()
@@ -1085,14 +1054,13 @@ async function openstatementindailydetail () {
         return;
     }
 
-        // Fallback (shouldn’t hit here often)
-        event.target.disabled = false;
-        Swal.fire({
-            icon: 'warning',
-            title: 'No Data',
-            text: 'No validation data returned. Please try again.',
-        });
-    }
+    // Fallback (shouldn�t hit here often)
+    event.target.disabled = false;
+    Swal.fire({
+        icon: 'warning',
+        title: 'No Data',
+        text: 'No validation data returned. Please try again.',
+    });
 }
 
 
