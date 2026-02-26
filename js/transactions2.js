@@ -747,11 +747,12 @@ if(statementofaccountbtn) statementofaccountbtn.addEventListener('click', openSt
 
 // statement of daily detail-------------------------------------------------------------------------------------------------------------------------------------
 
-async function openstatementindailydetail () {
+async function openstatementindailydetail (useV2 = false) {
     
-    await  httpRequest('statementindailydetail.php')
+    await  httpRequest(useV2 ? 'statementindailydetailv2.php' : 'statementindailydetail.php')
     bb=0
     form = document.getElementById('filterstatementindailydetailform')
+    const statementInDailyDetailActiveBtn = useV2 ? document.getElementById('statementindailydetailv2') : document.getElementById('statementindailydetail')
     fetchSavingsAccountUsers()
     
     form.querySelector('#startdate').valueAsDate = new Date()
@@ -759,7 +760,7 @@ async function openstatementindailydetail () {
     if(form.querySelector('button#submit')) form.querySelector('button#submit').addEventListener('click', generateStateOfAccountdetail)
     document.querySelector('button#print-soa').addEventListener('click', printstatementindailydetail)
     document.querySelector('button#export-soa').addEventListener('click', exportstatementindailydetail)
-    document.getElementById('submitmodal').addEventListener('click', submitmodalexcess)
+    if(!useV2 && document.getElementById('submitmodal')) document.getElementById('submitmodal').addEventListener('click', submitmodalexcess)
 
     let paginationLimit = 20;
     datasource = []
@@ -833,6 +834,35 @@ async function openstatementindailydetail () {
         return;
     } else {
         form.accountnumber.style.borderColor = '';
+    }
+    if(useV2) {
+        const payload = new FormData();
+        payload.append('accountnumber', form.accountnumber.value);
+        payload.append('startdate', form.startdate.value);
+        payload.append('enddate', form.enddate.value);
+
+        let result2, res2;
+        try {
+            result2 = await fetch('../controllers/statementindetailupdated.php', {
+                method: 'POST',
+                body: payload,
+                headers: new Headers()
+            });
+            res2 = await result2.json();
+        } catch (e) {
+            event.target.disabled = false;
+            Swal.fire({ icon: 'error', title: 'Network Error', text: 'Could not fetch statement. Try again.' });
+            return;
+        }
+
+        event.target.disabled = false;
+        if (res2.status) {
+            renderStatementDetail(res2);
+        } else {
+            if (typeof jtabledata !== 'undefined' && jtabledata) jtabledata.innerHTML = '';
+            callModal(res2.message, 0);
+        }
+        return;
     }
 
     // ?? STEP 1: Call first controller to validate daily deposits
@@ -1237,7 +1267,7 @@ function statementindailydetailsetCurrentPage(pageNum) {
 
         if (document.querySelectorAll('.source-row-item').length == 0 && document.querySelector('#statementindailydetailtable #tablefooter')) {
             document.querySelector('#statementindailydetailtable #tablefooter')?.remove();
-            statementindailydetailbtn.click();
+            if(statementInDailyDetailActiveBtn) statementInDailyDetailActiveBtn.click();
             form.querySelector('button#submit').click();
         }
     }
@@ -1723,7 +1753,10 @@ async function callstatementbuttonhere(transferAccountNumber, id, accounttype) {
 }
 
 var statementindailydetailbtn = document.getElementById('statementindailydetail');
-if(statementindailydetailbtn) statementindailydetailbtn.addEventListener('click', openstatementindailydetail, false);
+if(statementindailydetailbtn) statementindailydetailbtn.addEventListener('click', ()=>openstatementindailydetail(false), false);
+
+var statementindailydetailv2btn = document.getElementById('statementindailydetailv2');
+if(statementindailydetailv2btn) statementindailydetailv2btn.addEventListener('click', ()=>openstatementindailydetail(true), false);
 
 
 
