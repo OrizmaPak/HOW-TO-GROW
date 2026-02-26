@@ -749,7 +749,7 @@ if(statementofaccountbtn) statementofaccountbtn.addEventListener('click', openSt
 
 async function openstatementindailydetail (useV2 = false) {
     
-    await  httpRequest(useV2 ? 'statementindailydetailv2.php' : 'statementindailydetail.php')
+    await  httpRequest(useV2 ? 'statementindailydetailv2.php' : 'statementindailydetail.php', 'override', null, 'reset')
     bb=0
     form = document.getElementById('filterstatementindailydetailform')
     const statementInDailyDetailActiveBtn = useV2 ? document.getElementById('statementindailydetailv2') : document.getElementById('statementindailydetail')
