@@ -1287,7 +1287,7 @@ async function appendstatementindailydetailTableRows(item, index) {
 
     jtabledata.innerHTML += `
         <tr class="source-row-item">
-            <td>${index + 1}</td>
+            <td>${item.sn}</td>
             <td>${formatDate(item.transactiondate ?? '')}</td>
             <td>${formatDate(item.valuedate ?? '')}</td>
             <td>${item.description ?? ''}</td>
