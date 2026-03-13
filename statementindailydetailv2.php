@@ -141,7 +141,7 @@
 
 <div class="jcontainer">
     <h1 class="jpageheader pr-only">HOW TO GROW</h1>
-    <h1 class="jpageheader pr-hide">Statement In Daily Detail</h1>
+    <h1 class="jpageheader pr-hide">Statement In Daily Detail (Version 2)</h1>
     <div class="jpagecontent" id="jpagecontent">
         <div>
             <form class="jform no-pr" id ="filterstatementindailydetailform" style="margin-top: 15px;">
