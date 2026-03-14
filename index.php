@@ -967,7 +967,7 @@ $_SESSION["email"] = $_SESSION["htguseremail"];
                     </div>
                     <div style="font-family: 'Roboto' !important" id='statementindailydetailv2' name="navtransactions"
                         class="navleftsubitem ttesstt" title="Statement In Daily Detail (Version 2)">
-                        <p>Statement In Daily Detail (Version 2)</p>
+                        <p>Statement In Daily Detail V2</p>
                         <span style="font-size:10px;color:#007bff;font-weight:600">(V2)</span>
                         <img src="../images/monitor.png" alt="">
                     </div>
