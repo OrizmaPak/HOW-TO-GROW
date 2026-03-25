@@ -2148,24 +2148,26 @@ async function printtransactionreportprinterer(
       .split('|')
       .map((dat) => {
         if (dat.length > 5) {
-  // Count commas
-  const commaCount = (dat.match(/,/g) || []).length;
+          const normalizedDat = dat.trim();
+          const qtyMatch = normalizedDat.match(/(?:^|,)\s*qty\s*:\s*([^,]+)/i);
+          const priceMatch = normalizedDat.match(/(?:^|,)\s*price\s*:\s*([^,]+)/i);
 
-  // If there are 4 commas (or more), remove the first comma occurrence
-  if (commaCount > 2) {
-    dat = dat.replace(',', '');
-  }
+          if (!qtyMatch || !priceMatch) {
+            console.warn('Invalid propertyitems row format:', normalizedDat);
+            return null;
+          }
 
-  // Now safely split the remaining string
-  let [itemname, qtyPart, pricePart] = dat.split(',');
-  console.log('qtyPart', qtyPart);
+          const itemname = normalizedDat
+            .slice(0, qtyMatch.index)
+            .replace(/,+\s*$/, '')
+            .trim();
 
-  return {
-    itemname: itemname.trim(),
-    qty: Number(qtyPart.split(':')[1].trim()),
-    price: Number(pricePart.split(':')[1].trim()),
-  };
-}
+          return {
+            itemname,
+            qty: Number(qtyMatch[1].trim()),
+            price: Number(priceMatch[1].trim()),
+          };
+        }
 
         return null;
       })
