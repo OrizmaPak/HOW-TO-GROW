@@ -552,6 +552,7 @@ function statementOfAccountsetCurrentPage(pageNum) {
         jtabledata.innerHTML += `
         <tr class="source-row-item">
             <td colspan="12">BALANCE BROUGHT FORWARD</td>
+            <td></td>
             <td>${formatMoney(bb)}</td>
         </tr>`;
 
@@ -884,7 +885,7 @@ async function openstatementindailydetail (useV2 = false) {
         return;
     }
 
-    // CASE A: ? Error — do not proceed, disable Proceed button
+    // CASE A: ? Error ï¿½ do not proceed, disable Proceed button
     if (res1 && res1.status === false) {
         await Swal.fire({
             icon: 'error',
@@ -905,12 +906,12 @@ async function openstatementindailydetail (useV2 = false) {
         return;
     }
 
-    // CASE B: ? Resolved notice — status true but empty data: proceed automatically
+    // CASE B: ? Resolved notice ï¿½ status true but empty data: proceed automatically
     if (res1 && res1.status === true && Array.isArray(res1.data) && res1.data.length === 0) {
         await Swal.fire({
             icon: 'info',
             title: 'Daily Deposits Resolved',
-            text: res1.message || 'HTG has resolved the daily deposits for this account. Proceeding to statement…',
+            text: res1.message || 'HTG has resolved the daily deposits for this account. Proceeding to statementï¿½',
             timer: 1800,
             showConfirmButton: false,
             willClose: () => {}
@@ -941,7 +942,7 @@ async function openstatementindailydetail (useV2 = false) {
         return;
     }
 
-    // CASE C: ?? Has rows — show editable table in SweetAlert
+    // CASE C: ?? Has rows ï¿½ show editable table in SweetAlert
     if (res1 && res1.status === true && Array.isArray(res1.data) && res1.data.length > 0) {
         // Inline modal styles (sticky header + scroll)
         const modalStyles = `
@@ -1084,7 +1085,7 @@ async function openstatementindailydetail (useV2 = false) {
         return;
     }
 
-    // Fallback (shouldn’t hit here often)
+    // Fallback (shouldnï¿½t hit here often)
     event.target.disabled = false;
     Swal.fire({
         icon: 'warning',
@@ -1246,6 +1247,7 @@ function statementindailydetailsetCurrentPage(pageNum) {
         jtabledata.innerHTML += `
         <tr class="source-row-item">
             <td colspan="12">BALANCE BROUGHT FORWARD</td>
+            <td></td>
             <td>${formatMoney(bb)}</td>
         </tr>`;
 
