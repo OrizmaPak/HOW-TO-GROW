@@ -548,13 +548,15 @@ function statementOfAccountsetCurrentPage(pageNum) {
         //         document.getElementById('pitem').classList.add('hidden')
         // }
 
-        // Add balance brought forward to the table
-        jtabledata.innerHTML += `
+        // Add balance brought forward to the table on page one only
+        if (currentPage === 1) {
+            jtabledata.innerHTML += `
         <tr class="source-row-item">
             <td colspan="12">BALANCE BROUGHT FORWARD</td>
             <td></td>
             <td>${formatMoney(bb)}</td>
         </tr>`;
+        }
 
         // Display only items for the current page
         accountstatements.forEach((item, index) => {
@@ -1243,13 +1245,15 @@ function statementindailydetailsetCurrentPage(pageNum) {
         //         document.getElementById('pitem').classList.add('hidden')
         // }
 
-        // Add balance brought forward to the table
-        jtabledata.innerHTML += `
+        // Add balance brought forward to the table on page one only
+        if (currentPage === 1) {
+            jtabledata.innerHTML += `
         <tr class="source-row-item">
             <td colspan="12">BALANCE BROUGHT FORWARD</td>
             <td></td>
             <td>${formatMoney(bb)}</td>
         </tr>`;
+        }
 
         // Display only items for the current page
         accountstatements.forEach((item, index) => {
