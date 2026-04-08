@@ -2314,7 +2314,15 @@ const deletestockledgerentry=(id)=>{
         paramstr.append('id', id);
         return paramstr;
     };
-    callController('removestockio.php', params(), 'removestockio', null, run)
+    callModal('',0,10);
+    setTimeout(()=>{
+        callModal(`<h2>Warning<h2>
+        <br/>
+        <p>This stock ledger row is about to be deleted.</p>
+        <button onclick="callModal('',0,10)" type="button" style="border-radius: 5px;margin-right: 20px;padding: 9px;cursor: pointer;width: 57px;margin-top: 10px;margin-left: auto;border-width: 0px;color: white;background: #6EB4FFFF;">cancel</button>
+        <button onclick="callModal('',0,10);callController('removestockio.php', params(), 'removestockio', null, run)" type="button" style="border-radius: 5px;padding: 9px;cursor: pointer;width: 57px;margin-top: 10px;margin-left: auto;border-width: 0px;color: white;background: #ED404CFF;">delete</button>`
+        , 2, 30000)
+    },500)
 }
 
 function appendstocklederorehistoryTableRows(data, index) {
