@@ -147,7 +147,7 @@
             el.previousElementSibling.textContent = 'edit';
         }, 100);
     }
-    
+     
 }
 
 
