@@ -2304,6 +2304,19 @@ var stockledgerorehistorysetCurrentPage = (pageNum) => {
     }
 };
 
+const deletestockledgerentry=(id)=>{
+    const run=()=>{
+        const viewBtn = document.getElementById('stockledgerhistoryviewbtn');
+        if(viewBtn) viewBtn.click();
+    }
+    const params=()=>{
+        var paramstr = new FormData();
+        paramstr.append('id', id);
+        return paramstr;
+    };
+    callController('removestockio.php', params(), 'removestockio', null, run)
+}
+
 function appendstocklederorehistoryTableRows(data, index) {
     // var customerinfo = propertycustomers.find(value => value.id === item.customer) 
     document.getElementById("stockledgerorehistorytablecontent").innerHTML += `
@@ -2317,9 +2330,8 @@ function appendstocklederorehistoryTableRows(data, index) {
                                 <td> ${data.qtyout} </td>
                                 <td> ${data.balance} </td>
                                 <td>
-                                    <div class="${index ==0 ? 'hidden' : 'hidden'}" style="align-items:center">
-                                        <button onclick="outtakemodal(${data.batchid})" style="padding: 5px 6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:green;border-radius:3px">View</button>
-                                        <button onclick="editOuttakeItem(${data.batchid})" style="padding: 5px 6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:blue;border-radius:3px">Edit</button>
+                                    <div style="align-items:center;display:flex;gap:6px">
+                                        <button onclick="deletestockledgerentry('${data.id}')" style="padding: 5px 6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:red;border-radius:3px">Delete</button>
                                     </div>
                                 </td>
                             </tr>

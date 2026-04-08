@@ -1214,26 +1214,21 @@ function statementindailydetailsetCurrentPage(pageNum) {
         console.log('bb', balancebb)
         
 
-        // Calculate total credits and debits for all account statements
+        // Use backend cumulative totals when available so the Balance column aligns with Total Credit/Total Debit.
         accountstatements.forEach((item, i) => {
     console.log('i', i, balancebb);
     
-    // Safely coerce credit and debit to numbers, ensuring nullish values are treated as 0
     item.credit = +(item.credit ?? 0);
     item.debit = +(item.debit ?? 0);
+    item.totalcredit = +(item.totalcredit ?? 0);
+    item.totaldebit = +(item.totaldebit ?? 0);
     
-    // Calculate credits and debits individually for each item
     totalCredits += item.credit;
     totalDebits += item.debit;
-
-    let currentBalance = totalCredits - totalDebits;
     
-    // Assign calculated balance for the first and subsequent items
-    // if (i === 0) {
-        item.calculatedBalance = currentBalance + balancebb;  // Add initial balance for the first item
-    // } else {
-        // item.calculatedBalance = currentBalance;  // Use cumulative balance for subsequent items
-    // }
+    const rowTotalCredit = item.totalcredit || totalCredits;
+    const rowTotalDebit = item.totaldebit || totalDebits;
+    item.calculatedBalance = balancebb + rowTotalCredit - rowTotalDebit;
     
     console.log('item.calculatedBalance', item.calculatedBalance);
 });
@@ -1391,22 +1386,26 @@ function renderTablestatementindailydetailFooter () {
     let credit = datasource.reduce( (prev, curr) => prev + parseFloat(+curr.credit), 0)
     let servcharge = datasource.reduce( (prev, curr) => prev + parseFloat(+curr.servicecharge), 0)
     
-    thetotalstatement = credit
+function renderTablestatementindailydetailFooter () {
+    let debit = datasource.reduce( (prev, curr) => prev + parseFloat(+curr.debit), 0)
+    let credit = datasource.reduce( (prev, curr) => prev + parseFloat(+curr.credit), 0)
+    let servcharge = datasource.reduce( (prev, curr) => prev + parseFloat(+curr.servicecharge), 0)
+    let lastItem = datasource[datasource.length - 1] || {}
+    let finalTotalCredit = +(lastItem.totalcredit ?? credit)
+    let finalTotalDebit = +(lastItem.totaldebit ?? debit)
+    
+    thetotalstatement = finalTotalCredit
  
     document.querySelector('#statementindailydetailtable tbody').innerHTML += `
         <tr id="tablefooter">
             <td style="text-transform: uppercase;text-align: left;font-weight:bold" colspan="10"> total </td>
             <td style="text-transform: uppercase;font-weight:bold;text-align:left">${ formatMoney(servcharge) }</td>
-            <td style="text-transform: uppercase;font-weight:bold;text-align:left"> ${formatMoney(credit)}</td>
-            <td style="text-transform: uppercase;font-weight:bold;text-align:left">${formatMoney(debit)}</td>
-            <td style="text-transform: uppercase;font-weight:bold;text-align:left">${ formatMoney(credit - debit+bb) }</td>
+            <td style="text-transform: uppercase;font-weight:bold;text-align:left"> ${formatMoney(finalTotalCredit)}</td>
+            <td style="text-transform: uppercase;font-weight:bold;text-align:left">${formatMoney(finalTotalDebit)}</td>
+            <td style="text-transform: uppercase;font-weight:bold;text-align:left">${ formatMoney(bb + finalTotalCredit - finalTotalDebit) }</td>
         </tr>
     `
 }
-
-async function fetchUsersForSavingsstatementindailydetail () {
-     let result = await fetch('../controllers/fetchallusers.php', {method: 'POST', headers: new Headers()})
-    let res = await result.json();
     if(result) {
         hideSpinner()
         if(res.status) statementindailydetailusers = res.data;
