@@ -2328,6 +2328,7 @@ const deletestockledgerentry=(id)=>{
 function appendstocklederorehistoryTableRows(data, index) {
     // var customerinfo = propertycustomers.find(value => value.id === item.customer) 
     const isBalanceBfRow = /balance\s*(b\/f|brought\s*forward)/i.test(data.description ?? '');
+    const canDeleteStockLedgerRow = document.getElementById('sessionrole')?.value == 'SUPERADMIN';
     document.getElementById("stockledgerorehistorytablecontent").innerHTML += `
                             <tr data-open="false" class="source-row-item">
                                 <td> ${index+1} </td>
@@ -2340,7 +2341,7 @@ function appendstocklederorehistoryTableRows(data, index) {
                                 <td> ${data.balance} </td>
                                 <td>
                                     <div style="align-items:center;display:flex;gap:6px">
-                                        ${isBalanceBfRow ? '' : `<button onclick="deletestockledgerentry('${data.id}')" style="padding: 5px 6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:red;border-radius:3px">Delete</button>`}
+                                        ${isBalanceBfRow || !canDeleteStockLedgerRow ? '' : `<button onclick="deletestockledgerentry('${data.id}')" style="padding: 5px 6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:red;border-radius:3px">Delete</button>`}
                                     </div>
                                 </td>
                             </tr>
