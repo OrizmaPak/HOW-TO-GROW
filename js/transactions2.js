@@ -584,12 +584,20 @@ function statementOfAccountsetCurrentPage(pageNum) {
 
 async function appendStatementOfAccountTableRows(item, index) {
     // let user = statementofaccountusers.find(val => val.email == item.savingsaccount.user);
+    const isSuperAdmin = document.getElementById('sessionrole').value == 'SUPERADMIN';
+    const sessionPermissionRaw = document.getElementById('sessionpermission')?.value || '';
+    const sessionPermissionSet = new Set(
+        sessionPermissionRaw
+            .split('|')
+            .map((perm) => perm.trim().toUpperCase())
+            .filter(Boolean)
+    );
+    const hasServiceChargeDeletePermission =
+        sessionPermissionSet.has('REMOVE SERVICE CHARGE') ||
+        sessionPermissionSet.has('DELETE SERVICE CHARGE');
     const canRemoveServiceCharge =
-        document.getElementById('sessionrole').value == 'SUPERADMIN' &&
-        (
-            document.getElementById('sessionpermission').value.includes('REMOVE SERVICE CHARGE') ||
-            document.getElementById('sessionpermission').value.includes('DELETE SERVICE CHARGE')
-        );
+        isSuperAdmin || hasServiceChargeDeletePermission;
+    const isServiceChargeRow = (item.savingsaccount.description ?? '').trim().toLowerCase().startsWith('service charge');
     
     if(item.savingsproductname == 'EXCESS CASH'){
         document.getElementById('otherinfo').classList.remove('hidden')
@@ -619,7 +627,7 @@ async function appendStatementOfAccountTableRows(item, index) {
                     onclick="callstatementresolvemodal('${item.savingsaccount.credit}', '${item.savingsaccount.accountnumber}', '${item.savingsaccount.reference}')">Resolve</button>` : ''}
                 </div>
                 <div class="flex no-pr ${canRemoveServiceCharge ? '' : 'hidden'}" style="align-items:center">
-                    ${item.savingsaccount.description.toLowerCase().startsWith('service charge') ? `<button style="padding: 5px 6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:red;border-radius:3px" 
+                    ${isServiceChargeRow ? `<button style="padding: 5px 6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:red;border-radius:3px" 
                     onclick="removeservicechargetransaction('${item.savingsaccount.id}')">Delete</button>` : ''}
                 </div>
                 <div class="flex no-pr ${document.getElementById('sessionrole').value == 'SUPERADMIN' ? `${Number(item.credit) > 0 ? '' : 'hidden'}` : 'hidden'}" style="align-items:center;border:none">

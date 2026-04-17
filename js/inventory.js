@@ -2305,12 +2305,19 @@ var stockledgerorehistorysetCurrentPage = (pageNum) => {
 };
 
 const deletestockledgerentry=(id)=>{
+    const isSuperAdmin = document.getElementById('sessionrole')?.value == 'SUPERADMIN';
+    const sessionPermissionRaw = document.getElementById('sessionpermission')?.value || '';
+    const sessionPermissionSet = new Set(
+        sessionPermissionRaw
+            .split('|')
+            .map((perm) => perm.trim().toUpperCase())
+            .filter(Boolean)
+    );
+    const hasServiceChargeDeletePermission =
+        sessionPermissionSet.has('REMOVE SERVICE CHARGE') ||
+        sessionPermissionSet.has('DELETE SERVICE CHARGE');
     const canDeleteStockLedgerRow =
-        document.getElementById('sessionrole')?.value == 'SUPERADMIN' &&
-        (
-            document.getElementById('sessionpermission')?.value.includes('REMOVE SERVICE CHARGE') ||
-            document.getElementById('sessionpermission')?.value.includes('DELETE SERVICE CHARGE')
-        );
+        isSuperAdmin || hasServiceChargeDeletePermission;
     if(!canDeleteStockLedgerRow) return;
 
     const run=()=>{
@@ -2335,13 +2342,20 @@ const deletestockledgerentry=(id)=>{
 
 function appendstocklederorehistoryTableRows(data, index) {
     // var customerinfo = propertycustomers.find(value => value.id === item.customer) 
+    const isSuperAdmin = document.getElementById('sessionrole')?.value == 'SUPERADMIN';
+    const sessionPermissionRaw = document.getElementById('sessionpermission')?.value || '';
+    const sessionPermissionSet = new Set(
+        sessionPermissionRaw
+            .split('|')
+            .map((perm) => perm.trim().toUpperCase())
+            .filter(Boolean)
+    );
+    const hasServiceChargeDeletePermission =
+        sessionPermissionSet.has('REMOVE SERVICE CHARGE') ||
+        sessionPermissionSet.has('DELETE SERVICE CHARGE');
     const isBalanceBfRow = /balance\s*(b\/f|brought\s*forward)/i.test(data.description ?? '');
     const canDeleteStockLedgerRow =
-        document.getElementById('sessionrole')?.value == 'SUPERADMIN' &&
-        (
-            document.getElementById('sessionpermission')?.value.includes('REMOVE SERVICE CHARGE') ||
-            document.getElementById('sessionpermission')?.value.includes('DELETE SERVICE CHARGE')
-        );
+        isSuperAdmin || hasServiceChargeDeletePermission;
     document.getElementById("stockledgerorehistorytablecontent").innerHTML += `
                             <tr data-open="false" class="source-row-item">
                                 <td> ${index+1} </td>
