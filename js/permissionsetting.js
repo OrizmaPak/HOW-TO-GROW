@@ -135,6 +135,7 @@ const permset_transactionsdata = [
     "COLLECTIONS",
     "COLLECTIONS VIEW",
     "UPDATE DAILY UNITS",
+    "REMOVE SERVICE CHARGE",
     "APPROVED COLLECTIONS",
     "DECLINED COLLECTIONS",
     "WITHDRAWAL",

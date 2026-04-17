@@ -584,6 +584,9 @@ function statementOfAccountsetCurrentPage(pageNum) {
 
 async function appendStatementOfAccountTableRows(item, index) {
     // let user = statementofaccountusers.find(val => val.email == item.savingsaccount.user);
+    const canRemoveServiceCharge =
+        document.getElementById('sessionrole').value == 'SUPERADMIN' &&
+        document.getElementById('sessionpermission').value.includes('REMOVE SERVICE CHARGE');
     
     if(item.savingsproductname == 'EXCESS CASH'){
         document.getElementById('otherinfo').classList.remove('hidden')
@@ -612,7 +615,7 @@ async function appendStatementOfAccountTableRows(item, index) {
                     ${item.savingsproductname == 'EXCESS CASH' && item.savingsaccount.credit > 0 ? `<button style="padding: 5px 6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:blue;border-radius:3px" 
                     onclick="callstatementresolvemodal('${item.savingsaccount.credit}', '${item.savingsaccount.accountnumber}', '${item.savingsaccount.reference}')">Resolve</button>` : ''}
                 </div>
-                <div class="flex no-pr ${document.getElementById('sessionrole').value == 'SUPERADMIN' ? '' : 'hidden'}" style="align-items:center">
+                <div class="flex no-pr ${canRemoveServiceCharge ? '' : 'hidden'}" style="align-items:center">
                     ${item.savingsaccount.description.toLowerCase().startsWith('service charge') ? `<button style="padding: 5px 6px;cursor:pointer;border:none;outline:none;font-size:10px;color:white;background-color:red;border-radius:3px" 
                     onclick="removeservicechargetransaction('${item.savingsaccount.id}')">Delete</button>` : ''}
                 </div>
@@ -1279,6 +1282,9 @@ function statementindailydetailsetCurrentPage(pageNum) {
 
 async function appendstatementindailydetailTableRows(item, index) {
     let user = statementindailydetailusers.find(val => val.email == item.user);
+    const canRemoveServiceCharge =
+        document.getElementById('sessionrole').value == 'SUPERADMIN' &&
+        document.getElementById('sessionpermission').value.includes('REMOVE SERVICE CHARGE');
     
     if(item.savingsproductname == 'EXCESS CASH'){
         document.getElementById('otherinfo').classList.remove('hidden')
@@ -1325,7 +1331,7 @@ async function appendstatementindailydetailTableRows(item, index) {
       </button>` : ''}
 
     <!-- Delete button (Superadmin only) -->
-    ${document.getElementById('sessionrole').value == 'SUPERADMIN' && 
+    ${canRemoveServiceCharge && 
       item.description.toLowerCase().startsWith('service charge') ? `
       <button 
         style="padding:5px 8px;cursor:pointer;border:none;outline:none;font-size:10px;display:none;
