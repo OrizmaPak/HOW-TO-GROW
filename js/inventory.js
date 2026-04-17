@@ -2305,6 +2305,11 @@ var stockledgerorehistorysetCurrentPage = (pageNum) => {
 };
 
 const deletestockledgerentry=(id)=>{
+    const canDeleteStockLedgerRow =
+        document.getElementById('sessionrole')?.value == 'SUPERADMIN' &&
+        document.getElementById('sessionpermission')?.value.includes('REMOVE SERVICE CHARGE');
+    if(!canDeleteStockLedgerRow) return;
+
     const run=()=>{
         const viewBtn = document.getElementById('stockledgerhistoryviewbtn');
         if(viewBtn) viewBtn.click();
@@ -2328,7 +2333,9 @@ const deletestockledgerentry=(id)=>{
 function appendstocklederorehistoryTableRows(data, index) {
     // var customerinfo = propertycustomers.find(value => value.id === item.customer) 
     const isBalanceBfRow = /balance\s*(b\/f|brought\s*forward)/i.test(data.description ?? '');
-    const canDeleteStockLedgerRow = document.getElementById('sessionrole')?.value == 'SUPERADMIN';
+    const canDeleteStockLedgerRow =
+        document.getElementById('sessionrole')?.value == 'SUPERADMIN' &&
+        document.getElementById('sessionpermission')?.value.includes('REMOVE SERVICE CHARGE');
     document.getElementById("stockledgerorehistorytablecontent").innerHTML += `
                             <tr data-open="false" class="source-row-item">
                                 <td> ${index+1} </td>
