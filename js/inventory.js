@@ -2307,7 +2307,10 @@ var stockledgerorehistorysetCurrentPage = (pageNum) => {
 const deletestockledgerentry=(id)=>{
     const canDeleteStockLedgerRow =
         document.getElementById('sessionrole')?.value == 'SUPERADMIN' &&
-        document.getElementById('sessionpermission')?.value.includes('REMOVE SERVICE CHARGE');
+        (
+            document.getElementById('sessionpermission')?.value.includes('REMOVE SERVICE CHARGE') ||
+            document.getElementById('sessionpermission')?.value.includes('DELETE SERVICE CHARGE')
+        );
     if(!canDeleteStockLedgerRow) return;
 
     const run=()=>{
@@ -2335,7 +2338,10 @@ function appendstocklederorehistoryTableRows(data, index) {
     const isBalanceBfRow = /balance\s*(b\/f|brought\s*forward)/i.test(data.description ?? '');
     const canDeleteStockLedgerRow =
         document.getElementById('sessionrole')?.value == 'SUPERADMIN' &&
-        document.getElementById('sessionpermission')?.value.includes('REMOVE SERVICE CHARGE');
+        (
+            document.getElementById('sessionpermission')?.value.includes('REMOVE SERVICE CHARGE') ||
+            document.getElementById('sessionpermission')?.value.includes('DELETE SERVICE CHARGE')
+        );
     document.getElementById("stockledgerorehistorytablecontent").innerHTML += `
                             <tr data-open="false" class="source-row-item">
                                 <td> ${index+1} </td>

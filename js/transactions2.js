@@ -586,7 +586,10 @@ async function appendStatementOfAccountTableRows(item, index) {
     // let user = statementofaccountusers.find(val => val.email == item.savingsaccount.user);
     const canRemoveServiceCharge =
         document.getElementById('sessionrole').value == 'SUPERADMIN' &&
-        document.getElementById('sessionpermission').value.includes('REMOVE SERVICE CHARGE');
+        (
+            document.getElementById('sessionpermission').value.includes('REMOVE SERVICE CHARGE') ||
+            document.getElementById('sessionpermission').value.includes('DELETE SERVICE CHARGE')
+        );
     
     if(item.savingsproductname == 'EXCESS CASH'){
         document.getElementById('otherinfo').classList.remove('hidden')
@@ -1284,7 +1287,10 @@ async function appendstatementindailydetailTableRows(item, index) {
     let user = statementindailydetailusers.find(val => val.email == item.user);
     const canRemoveServiceCharge =
         document.getElementById('sessionrole').value == 'SUPERADMIN' &&
-        document.getElementById('sessionpermission').value.includes('REMOVE SERVICE CHARGE');
+        (
+            document.getElementById('sessionpermission').value.includes('REMOVE SERVICE CHARGE') ||
+            document.getElementById('sessionpermission').value.includes('DELETE SERVICE CHARGE')
+        );
     
     if(item.savingsproductname == 'EXCESS CASH'){
         document.getElementById('otherinfo').classList.remove('hidden')
