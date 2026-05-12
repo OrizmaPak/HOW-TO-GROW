@@ -2304,6 +2304,27 @@ var stockledgerorehistorysetCurrentPage = (pageNum) => {
     }
 };
 
+const runStockLedgerDelete = (id) => {
+    const params = () => {
+        const paramstr = new FormData();
+        paramstr.append('id', id);
+        return paramstr;
+    };
+    const onDeleteResponse = (result) => {
+        const isSuccess =
+            result?.status === true ||
+            `${result?.result ?? ''}`.toLowerCase().includes('successful');
+        if(isSuccess){
+            callModal(result?.message || 'Stock ledger row deleted successfully', 1);
+            const viewBtn = document.getElementById('stockledgerhistoryviewbtn');
+            if(viewBtn) viewBtn.click();
+            return;
+        }
+        callModal(result?.message || result?.result || 'Delete failed', 0);
+    };
+    callController('removestockio.php', params(), 'removestockio', null, onDeleteResponse);
+}
+
 const deletestockledgerentry=(id)=>{
     const isSuperAdmin = document.getElementById('sessionrole')?.value == 'SUPERADMIN';
     const sessionPermissionRaw = document.getElementById('sessionpermission')?.value || '';
@@ -2319,23 +2340,13 @@ const deletestockledgerentry=(id)=>{
     const canDeleteStockLedgerRow =
         isSuperAdmin || hasServiceChargeDeletePermission;
     if(!canDeleteStockLedgerRow) return;
-
-    const run=()=>{
-        const viewBtn = document.getElementById('stockledgerhistoryviewbtn');
-        if(viewBtn) viewBtn.click();
-    }
-    const params=()=>{
-        var paramstr = new FormData();
-        paramstr.append('id', id);
-        return paramstr;
-    };
     callModal('',0,10);
     setTimeout(()=>{
         callModal(`<h2>Warning<h2>
         <br/>
         <p>This stock ledger row is about to be deleted.</p>
         <button onclick="callModal('',0,10)" type="button" style="border-radius: 5px;margin-right: 20px;padding: 9px;cursor: pointer;width: 57px;margin-top: 10px;margin-left: auto;border-width: 0px;color: white;background: #6EB4FFFF;">cancel</button>
-        <button onclick="callModal('',0,10);callController('removestockio.php', params(), 'removestockio', null, run)" type="button" style="border-radius: 5px;padding: 9px;cursor: pointer;width: 57px;margin-top: 10px;margin-left: auto;border-width: 0px;color: white;background: #ED404CFF;">delete</button>`
+        <button onclick="callModal('',0,10);runStockLedgerDelete('${id}')" type="button" style="border-radius: 5px;padding: 9px;cursor: pointer;width: 57px;margin-top: 10px;margin-left: auto;border-width: 0px;color: white;background: #ED404CFF;">delete</button>`
         , 2, 30000)
     },500)
 }

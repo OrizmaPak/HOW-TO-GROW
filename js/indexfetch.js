@@ -976,6 +976,7 @@ function runNotification(){
         }
         if(name == 'fetchinventoryforapproval'){
             // console.log('spread the exceededmaturityproperties data', result)
+            if(document.getElementById('sessionrole').value !== 'SUPERADMIN')return
             if(result.data){ 
                 immediateNotice = immediateNotice + 1
                 document.getElementById('notificationNumber').textContent = immediateNotice;
@@ -1043,7 +1044,9 @@ function runNotification(){
     callController('bookletspendingapproval.php', null, 'bookletspendingapproval', null, bookletspendingapproval, 'silent');
     callController('fetchpersonnelnotification.php', null, 'fetchpersonnelnotification', null, fetchpersonnelnotification, 'silent');
     callController('exceededmaturityproperties.php', null, 'exceededmaturityproperties', null, exceededmaturityproperties, 'silent');
-    callController('fetchinventoryforapproval.php', null, 'fetchinventoryforapproval', null, fetchinventoryforapproval, 'silent');
+    if(document.getElementById('sessionrole').value === 'SUPERADMIN'){
+        callController('fetchinventoryforapproval.php', null, 'fetchinventoryforapproval', null, fetchinventoryforapproval, 'silent');
+    }
     callController('depositspendingapproval.php', null, 'depositspendingapproval', null, depositspendingapproval, 'silent');
     callController('fetchcustomerdataforupdate.php', null, 'fetchcustomerdataforupdate', null, approvecustomer, 'silent');
     callController('fetchnotinstockpropertyitems.php', null, 'fetchnotinstockpropertyitems', null, notinstockproperty, 'silent');
