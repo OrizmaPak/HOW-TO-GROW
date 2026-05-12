@@ -85,27 +85,20 @@ async function fetchDepositCustomerAccount()  {
     let res = await result.json();
     if(result.status) {
         hideSpinner();
-        const normalizedPayload =
-            res?.posdata ||
-            res?.data?.posdata ||
-            res?.data;
         let parseResult = JSON.parse(JSON.stringify(res))
-        if(parseResult.status && Array.isArray(normalizedPayload) && normalizedPayload.length) {
-            depositcustomeraccount = {
-                ...parseResult,
-                data: normalizedPayload
-            }
+        if(parseResult.status) {
+            depositcustomeraccount = parseResult
             try {
-                document.querySelector('.profile #firstname').innerHTML = normalizedPayload[0].customerdetail.firstname
-                document.querySelector('.profile #lastname').innerHTML = normalizedPayload[0].customerdetail.lastname
-                document.querySelector('.profile #othername').innerHTML = normalizedPayload[0].customerdetail.othernames ?? ''
-                document.querySelector('.profile #phone').innerHTML = normalizedPayload[0].customerdetail.phonenumber
-                document.querySelector('.profile #domicilebranch').innerHTML = (profilelocations.find( value => value.id == normalizedPayload[0].accountdetail[0].location))?.location
-                document.querySelector('.profile #accounttype').innerHTML = normalizedPayload[0].accounttype.toLowerCase()
-                document.querySelector('.profile #gender').innerHTML = normalizedPayload[0].customerdetail.gender
-                document.querySelector('.profile #dateopened').innerHTML = normalizedPayload[0].accountdetail[0].registrationdate
-                document.querySelector('.profile #marketer').innerHTML = (customergroupnames?.find( val => val.id === normalizedPayload[0].accountdetail[0].marketergroup))?.groupname
-                document.querySelector('.profile #agreed').innerHTML = normalizedPayload[0].accountdetail[0].dailyunit
+                document.querySelector('.profile #firstname').innerHTML = parseResult.data[0].customerdetail.firstname
+                document.querySelector('.profile #lastname').innerHTML = parseResult.data[0].customerdetail.lastname
+                document.querySelector('.profile #othername').innerHTML = parseResult.data[0].customerdetail.othernames ?? ''
+                document.querySelector('.profile #phone').innerHTML = parseResult.data[0].customerdetail.phonenumber
+                document.querySelector('.profile #domicilebranch').innerHTML = (profilelocations.find( value => value.id == parseResult.data[0].accountdetail[0].location))?.location
+                document.querySelector('.profile #accounttype').innerHTML = parseResult.data[0].accounttype.toLowerCase()
+                document.querySelector('.profile #gender').innerHTML = parseResult.data[0].customerdetail.gender
+                document.querySelector('.profile #dateopened').innerHTML = parseResult.data[0].accountdetail[0].registrationdate
+                document.querySelector('.profile #marketer').innerHTML = (customergroupnames?.find( val => val.id === parseResult.data[0].accountdetail[0].marketergroup))?.groupname
+                document.querySelector('.profile #agreed').innerHTML = parseResult.data[0].accountdetail[0].dailyunit
             }
             catch(e) {}
         }

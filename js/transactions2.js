@@ -2411,14 +2411,7 @@ async function fetchInvoicePropertyAccounts () {
     
     if(result?.status) {
         closeJmodal();
-        const invoicePayload =
-            result?.posdata ||
-            result?.data?.posdata ||
-            result?.data;
-        let data = JSON.parse(JSON.stringify(invoicePayload));
-        if(!data?.propertyaccount?.length){
-            return callModal('Unable to retrieve property accounts', 0)
-        }
+        let data = JSON.parse(JSON.stringify(result.data));
         let customer = await findInvoiceCustomerProfile(data.propertyaccount[0].customer)
         invoiceData.customer = customer
         invoiceData.property = data
