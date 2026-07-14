@@ -25,22 +25,22 @@ $displayhtml .= '<style>
 .payment-channel-card.paystack{--brand:#0b63ce;--brand-soft:rgba(11,99,206,.12)}
 .payment-channel-card.flutterwave{--brand:#f5a400;--brand-soft:rgba(245,164,0,.18)}
 .payment-channel-top{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
-.payment-channel-brand{display:flex;align-items:center;gap:10px;color:#0f2410}
-.payment-channel-logo{width:48px;height:48px;border-radius:13px;background:linear-gradient(135deg,#fff,var(--brand-soft));border:1px solid rgba(13,84,3,.13);box-shadow:inset 0 0 0 1px rgba(255,255,255,.7),0 7px 16px rgba(0,0,0,.08);position:relative;display:flex;align-items:center;justify-content:center}
+.payment-channel-brand{display:flex;align-items:center;gap:12px;color:#0f172a}
+.payment-channel-logo{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#fff,var(--brand-soft));border:1px solid rgba(17,24,39,.1);box-shadow:inset 0 0 0 1px rgba(255,255,255,.7),0 7px 16px rgba(0,0,0,.08);position:relative;display:flex;align-items:center;justify-content:center}
 .payment-channel-logo .logo-bars{display:grid;grid-template-columns:repeat(3,6px);gap:3px;align-items:end}
 .payment-channel-logo .logo-bars span{display:block;width:6px;border-radius:5px;background:var(--brand)}
 .payment-channel-logo .logo-bars span:nth-child(1){height:12px}.payment-channel-logo .logo-bars span:nth-child(2){height:22px}.payment-channel-logo .logo-bars span:nth-child(3){height:16px}
 .payment-channel-logo .logo-wave{width:28px;height:28px;position:relative}
 .payment-channel-logo .logo-wave span{position:absolute;width:10px;height:10px;border-radius:50%;background:var(--brand)}
-.payment-channel-logo .logo-wave span:nth-child(1){left:0;top:2px}.payment-channel-logo .logo-wave span:nth-child(2){left:10px;top:9px}.payment-channel-logo .logo-wave span:nth-child(3){left:20px;top:16px}.payment-channel-logo .logo-wave span:nth-child(4){left:4px;top:18px;background:#0d5403}
-.payment-channel-brand strong{display:block;font-size:20px;letter-spacing:-.3px;color:#102a12}
-.payment-channel-brand small{display:block;margin-top:3px;color:#66785f;font-size:11px;text-transform:uppercase;letter-spacing:.12rem}
+.payment-channel-logo .logo-wave span:nth-child(1){left:0;top:2px}.payment-channel-logo .logo-wave span:nth-child(2){left:10px;top:9px}.payment-channel-logo .logo-wave span:nth-child(3){left:20px;top:16px}.payment-channel-logo .logo-wave span:nth-child(4){left:4px;top:18px;background:#fb7a00}
+.payment-channel-wordmark{display:block;font-size:24px;font-weight:900;letter-spacing:-.7px;line-height:1}
+.payment-channel-wordmark.paystack-text{color:#0b63ce}
+.payment-channel-wordmark.flutterwave-text{color:#f5a400}
+.payment-channel-brand small{display:block;margin-top:6px;color:#667085;font-size:11px;text-transform:uppercase;letter-spacing:.12rem}
 .payment-channel-status{width:25px;height:25px;border-radius:999px;border:2px solid #b9cab3;background:#fff;box-shadow:inset 0 0 0 5px #f2f6f0;flex:0 0 auto}
 .payment-channel-option input:checked + .payment-channel-card .payment-channel-status{background:#0ee639;border-color:#0d5403;box-shadow:inset 0 0 0 5px #fff,0 0 0 4px rgba(14,230,57,.18)}
-.payment-channel-name{position:relative;z-index:1;margin:24px 0 8px;font-size:15px;color:#0d5403;text-transform:uppercase;letter-spacing:.12rem}
+.payment-channel-name{position:relative;z-index:1;margin:24px 0 8px;font-size:15px;color:#1f2937;text-transform:uppercase;letter-spacing:.12rem}
 .payment-channel-copy{position:relative;z-index:1;margin:0;color:#42583f;font-size:13px;line-height:1.55;max-width:340px}
-.payment-channel-meta{position:relative;z-index:1;margin-top:16px;display:flex;gap:8px;flex-wrap:wrap}
-.payment-channel-pill{font-size:10px;letter-spacing:.08rem;text-transform:uppercase;color:#0d5403;background:#eef8ea;border:1px solid #d5e9cf;border-radius:999px;padding:5px 9px}
 .payment-channel-submit{display:flex;justify-content:center;margin-top:20px;position:relative}
 .payment-channel-submit button{min-width:210px;border:0;border-radius:8px;padding:12px 28px;color:#fff;font-weight:800;letter-spacing:.4px;background:linear-gradient(135deg,#0d5403,#179c18);box-shadow:0 10px 22px rgba(13,84,3,.25);cursor:pointer;text-transform:uppercase}
 .payment-channel-submit button:hover{filter:brightness(1.06);transform:translateY(-1px)}
@@ -52,19 +52,17 @@ $displayhtml .= '<div class="payment-channel-grid">';
 $displayhtml .= '<label class="payment-channel-option" for="selectpaymentchannelpaystack">';
 $displayhtml .= '<input type="radio" name="channel" id="selectpaymentchannelpaystack" value="Paystack">';
 $displayhtml .= '<div class="payment-channel-card paystack">';
-$displayhtml .= '<div class="payment-channel-top"><div class="payment-channel-brand"><div class="payment-channel-logo"><div class="logo-bars"><span></span><span></span><span></span></div></div><div><strong>Paystack</strong><small>Primary gateway</small></div></div><span class="payment-channel-status"></span></div>';
+$displayhtml .= '<div class="payment-channel-top"><div class="payment-channel-brand"><div class="payment-channel-logo"><div class="logo-bars"><span></span><span></span><span></span></div></div><div><strong class="payment-channel-wordmark paystack-text">Paystack</strong><small>Primary gateway</small></div></div><span class="payment-channel-status"></span></div>';
 $displayhtml .= '<h3 class="payment-channel-name">Card, bank and transfer rails</h3>';
 $displayhtml .= '<p class="payment-channel-copy">Use Paystack for local card, bank transfer, USSD and direct payment collection flows.</p>';
-$displayhtml .= '<div class="payment-channel-meta"><span class="payment-channel-pill">Paystack</span><span class="payment-channel-pill">Online payments</span></div>';
 $displayhtml .= '</div>';
 $displayhtml .= '</label>';
 $displayhtml .= '<label class="payment-channel-option" for="selectpaymentchannelflutterwave">';
 $displayhtml .= '<input type="radio" name="channel" id="selectpaymentchannelflutterwave" value="Flutterwave">';
 $displayhtml .= '<div class="payment-channel-card flutterwave">';
-$displayhtml .= '<div class="payment-channel-top"><div class="payment-channel-brand"><div class="payment-channel-logo"><div class="logo-wave"><span></span><span></span><span></span><span></span></div></div><div><strong>Flutterwave</strong><small>Alternate gateway</small></div></div><span class="payment-channel-status"></span></div>';
+$displayhtml .= '<div class="payment-channel-top"><div class="payment-channel-brand"><div class="payment-channel-logo"><div class="logo-wave"><span></span><span></span><span></span><span></span></div></div><div><strong class="payment-channel-wordmark flutterwave-text">Flutterwave</strong><small>Alternate gateway</small></div></div><span class="payment-channel-status"></span></div>';
 $displayhtml .= '<h3 class="payment-channel-name">Local and global collection</h3>';
 $displayhtml .= '<p class="payment-channel-copy">Use Flutterwave for multi-channel payment acceptance across supported local and international rails.</p>';
-$displayhtml .= '<div class="payment-channel-meta"><span class="payment-channel-pill">Flutterwave</span><span class="payment-channel-pill">Gateway switch</span></div>';
 $displayhtml .= '</div>';
 $displayhtml .= '</label>';
 $displayhtml .= '</div>';
