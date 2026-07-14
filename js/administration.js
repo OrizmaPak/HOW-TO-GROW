@@ -2630,6 +2630,7 @@ const permset_administrationdata = [
   "REGISTER USER",
   "REJECT TRANSACTION DATE",
   "REVIEW SERIAL NUMBERS",
+  "SELECT PAYMENT CHANNEL",
   "SERIAL NUMBER LOOK UPS/COMPLAINTS",
   "SUPPLY BOOKLET",
   "TASK SCHEDULE",
@@ -5459,6 +5460,46 @@ cashierlimitid = ''
 
 var cashierlimit = document.getElementById("cashierlimit")
 if(cashierlimit)cashierlimit.addEventListener('click',opencashierlimit,false)
+
+
+const selectPaymentChannelController = 'selectpaymentchannel.php';
+const fetchPaymentChannelController = 'fetchpaymentchannel.php';
+
+function selectPaymentChannelParams() {
+    const paramstr = new FormData();
+    const selectedChannel = document.querySelector('input[name="channel"]:checked');
+    paramstr.append('channel', selectedChannel ? selectedChannel.value : '');
+    return paramstr;
+}
+
+async function openSelectPaymentChannel() {
+    await httpRequest('selectpaymentchannel.php', 'override');
+
+    const setSelectedPaymentChannel = (result) => {
+        const currentChannel = result?.channel || result?.data?.channel || result?.data?.[0]?.channel;
+        if(!currentChannel)return;
+        const selectedInput = Array.from(document.querySelectorAll('input[name="channel"]'))
+            .find(input => input.value.toLowerCase() === String(currentChannel).toLowerCase());
+        if(selectedInput)selectedInput.checked = true;
+    };
+    callController(fetchPaymentChannelController, null, 'fetchpaymentchannel', null, setSelectedPaymentChannel, 'silent');
+
+    const submitBtn = document.getElementById('selectpaymentchannelsubmitbtn');
+    if(submitBtn)submitBtn.addEventListener('click', () => {
+        const selectedChannel = document.querySelector('input[name="channel"]:checked');
+        if(!selectedChannel)return callModal('Please select a payment channel', 0);
+        if(!selectPaymentChannelController)return callModal('Select Payment Channel controller is not configured yet', 0);
+
+        const action = (result) => {
+            if(result?.status)return callModal(result?.message || 'Payment channel saved successfully', 1);
+            return callModal(result?.message || 'Unable to save payment channel', 0);
+        };
+        callController(selectPaymentChannelController, selectPaymentChannelParams(), 'selectpaymentchannel', null, action);
+    });
+}
+
+var selectPaymentChannelNav = document.getElementById("selectpaymentchannel");
+if(selectPaymentChannelNav)selectPaymentChannelNav.addEventListener('click', openSelectPaymentChannel, false);
 
 
 

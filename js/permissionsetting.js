@@ -39,6 +39,7 @@ const permset_administrationdata = [
     "GROUP TARGET",
     "REVIEW SERIAL NUMBERS",
     "REJECT TRANSACTION DATE",
+    "SELECT PAYMENT CHANNEL",
     "MY PROFILE",
     "CONFIRM/COLLECT BOOKLET",
     "SUPPLY BOOKLET",

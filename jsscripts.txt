@@ -50,7 +50,6 @@
     <script type="text/javascript" src="./js/payments.js"></script>
     <script type="text/javascript" src="./js/viewpayments.js"></script>
 
-    <script type="text/javascript" src="./js/interbanktransfer.js"></script>
     <script type="text/javascript" src="./js/viewrecipients.js"></script>
 <script type="text/javascript" src="./js/viewtransfers.js"></script>
 

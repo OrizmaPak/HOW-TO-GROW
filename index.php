@@ -361,6 +361,11 @@ $_SESSION["email"] = $_SESSION["htguseremail"];
                         <p>Cashier Limit</p>
                         <img src="../images/key.png" alt="">
                     </div>
+                    <div style="font-family: 'Roboto' !important" id="selectpaymentchannel" name="navadministration"
+                        class="navleftsubitem">
+                        <p>Select Payment Channel</p>
+                        <img src="../images/key.png" alt="">
+                    </div>
                     <div style="font-family: 'Roboto' !important" id="commissioncategories" name="navadministration"
                         class="navleftsubitem">
                         <p>Commission Categories</p>
