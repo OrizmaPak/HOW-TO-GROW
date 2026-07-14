@@ -26,13 +26,8 @@ $displayhtml .= '<style>
 .payment-channel-card.flutterwave{--brand:#f5a400;--brand-soft:rgba(245,164,0,.18)}
 .payment-channel-top{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;width:100%}
 .payment-channel-brand{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:#0f172a;text-align:center}
-.payment-channel-logo{width:70px;height:70px;border-radius:20px;background:linear-gradient(135deg,#fff,var(--brand-soft));border:1px solid rgba(17,24,39,.1);box-shadow:inset 0 0 0 1px rgba(255,255,255,.7),0 10px 22px rgba(0,0,0,.1);position:relative;display:flex;align-items:center;justify-content:center}
-.payment-channel-logo .logo-bars{display:grid;grid-template-columns:repeat(3,8px);gap:4px;align-items:end}
-.payment-channel-logo .logo-bars span{display:block;width:8px;border-radius:7px;background:var(--brand)}
-.payment-channel-logo .logo-bars span:nth-child(1){height:16px}.payment-channel-logo .logo-bars span:nth-child(2){height:30px}.payment-channel-logo .logo-bars span:nth-child(3){height:22px}
-.payment-channel-logo .logo-wave{width:38px;height:38px;position:relative}
-.payment-channel-logo .logo-wave span{position:absolute;width:13px;height:13px;border-radius:50%;background:var(--brand)}
-.payment-channel-logo .logo-wave span:nth-child(1){left:0;top:3px}.payment-channel-logo .logo-wave span:nth-child(2){left:13px;top:12px}.payment-channel-logo .logo-wave span:nth-child(3){left:26px;top:21px}.payment-channel-logo .logo-wave span:nth-child(4){left:6px;top:24px;background:#fb7a00}
+.payment-channel-logo{width:96px;height:72px;border-radius:20px;background:linear-gradient(135deg,#fff,var(--brand-soft));border:1px solid rgba(17,24,39,.1);box-shadow:inset 0 0 0 1px rgba(255,255,255,.7),0 10px 22px rgba(0,0,0,.1);position:relative;display:flex;align-items:center;justify-content:center;padding:12px;box-sizing:border-box}
+.payment-channel-logo img{display:block;max-width:100%;max-height:100%;object-fit:contain}
 .payment-channel-wordmark{display:block;font-size:28px;font-weight:900;letter-spacing:-.8px;line-height:1}
 .payment-channel-wordmark.paystack-text{color:#0b63ce}
 .payment-channel-wordmark.flutterwave-text{color:#f5a400}
@@ -49,13 +44,13 @@ $displayhtml .= '<div class="payment-channel-grid">';
 $displayhtml .= '<label class="payment-channel-option" for="selectpaymentchannelpaystack">';
 $displayhtml .= '<input type="radio" name="channel" id="selectpaymentchannelpaystack" value="Paystack">';
 $displayhtml .= '<div class="payment-channel-card paystack">';
-$displayhtml .= '<div class="payment-channel-top"><div class="payment-channel-brand"><div class="payment-channel-logo"><div class="logo-bars"><span></span><span></span><span></span></div></div><strong class="payment-channel-wordmark paystack-text">Paystack</strong></div><span class="payment-channel-status"></span></div>';
+$displayhtml .= '<div class="payment-channel-top"><div class="payment-channel-brand"><div class="payment-channel-logo"><img src="./resource/paystack-logo.png" alt="Paystack logo"></div><strong class="payment-channel-wordmark paystack-text">Paystack</strong></div><span class="payment-channel-status"></span></div>';
 $displayhtml .= '</div>';
 $displayhtml .= '</label>';
 $displayhtml .= '<label class="payment-channel-option" for="selectpaymentchannelflutterwave">';
 $displayhtml .= '<input type="radio" name="channel" id="selectpaymentchannelflutterwave" value="Flutterwave">';
 $displayhtml .= '<div class="payment-channel-card flutterwave">';
-$displayhtml .= '<div class="payment-channel-top"><div class="payment-channel-brand"><div class="payment-channel-logo"><div class="logo-wave"><span></span><span></span><span></span><span></span></div></div><strong class="payment-channel-wordmark flutterwave-text">Flutterwave</strong></div><span class="payment-channel-status"></span></div>';
+$displayhtml .= '<div class="payment-channel-top"><div class="payment-channel-brand"><div class="payment-channel-logo"><img src="./resource/flutterwave-logo.png" alt="Flutterwave logo"></div><strong class="payment-channel-wordmark flutterwave-text">Flutterwave</strong></div><span class="payment-channel-status"></span></div>';
 $displayhtml .= '</div>';
 $displayhtml .= '</label>';
 $displayhtml .= '</div>';
