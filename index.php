@@ -981,6 +981,11 @@ $_SESSION["email"] = $_SESSION["htguseremail"];
                         <p>Customer Balances</p>
                         <img src="../images/item.png" alt="">
                     </div>
+                    <div style="font-family: 'Roboto' !important" id='propertybalances' name="navtransactions"
+                        class="navleftsubitem">
+                        <p>Property Balances</p>
+                        <img src="../images/item.png" alt="">
+                    </div>
                     
                     <div style="font-family: 'Roboto' !important" id="navbalancebf" class="navleftitem navdropper">
                         <p class="navdropindicator"><img class="navdropindicator" style="filter: invert(100%);"

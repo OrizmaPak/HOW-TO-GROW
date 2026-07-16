@@ -7081,6 +7081,43 @@ function submitCustomerBalances(event) {
 const customerbalancesbtn = document.getElementById('customerbalances');
 if (customerbalancesbtn) customerbalancesbtn.addEventListener('click', openCustomerBalances, false);
 
+// Property Balances --------------------------------------------------------------------------------------------------------------------------------------
+async function openPropertyBalances() {
+    await httpRequest('propertybalances.php');
+    form = document.getElementById('propertybalancesform');
+
+    if (form) {
+        setCustomerBalancesDefaults();
+        await fetchCustomerBalancesLocations();
+
+        const submitBtn = form.querySelector('button#submit');
+        if (submitBtn) submitBtn.addEventListener('click', submitPropertyBalances);
+    }
+}
+
+function submitPropertyBalances(event) {
+    event.preventDefault();
+    const submitBtn = event.target;
+    submitBtn.disabled = true;
+
+    const params = new URLSearchParams();
+    const locationVal = form.querySelector('#location')?.value;
+    const yearVal = form.querySelector('#year')?.value;
+    const monthVal = form.querySelector('#month')?.value;
+
+    if (locationVal) params.append('location', locationVal);
+    if (yearVal) params.append('year', yearVal);
+    if (monthVal) params.append('month', monthVal);
+
+    const url = `https://htg.com.ng/howtogrow/api/propertybalancesdump.php${params.toString() ? '?' + params.toString() : ''}`;
+    window.open(url, '_blank');
+
+    submitBtn.disabled = false;
+}
+
+const propertybalancesbtn = document.getElementById('propertybalances');
+if (propertybalancesbtn) propertybalancesbtn.addEventListener('click', openPropertyBalances, false);
+
 // Transfer Cash to Bank --------------------------------------------------------------------------------------------------------------------------------------
 async function opentransfercashtobank(){
     await httpRequest('transfercashtobank.php')

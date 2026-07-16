@@ -162,6 +162,7 @@ const permset_transactionsdata = [
     "EXCESS CASH REPORT",
     "RETURNED CASH REPORT",
     "AGGREGATED BRANCH DEPOSITS",
+    "PROPERTY BALANCES",
     "STATEMENT IN DAILY DETAIL V2"
 ]
 
