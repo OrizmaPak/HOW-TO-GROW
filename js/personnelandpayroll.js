@@ -5124,6 +5124,13 @@ const confirmsalpoplocation =(data, targetId = 'appconbranch')=>{
     branchSelect.innerHTML = '<option value="">--select branch--</option>';
     branchSelect.innerHTML += data.data.data.map(dat=>`<option value="${dat.id}">${dat.location.toUpperCase()}</option>`).join('');
 }
+
+function setPayrollClassSelection(className, checked) {
+    document.querySelectorAll(`.${className}`).forEach(item => {
+        item.checked = checked;
+    });
+}
+
 async function oreconfirmsalary() {
         //the fuction below is what calls the page and please put the 'override' as the second parameter for now.
         await httpRequest('confirmsalary.php', 'override') ;
@@ -5238,6 +5245,7 @@ var payrollclassasetCurrentPage = (pageNum) => {
         console.log('payrollclassa_datasource', payrollclassa_datasource)
         document.getElementById("payrollclassatablecontent").innerHTML = payrollclassa_datasource.map((data, index)=>`
                            <tr data-open="false" class="source-row-item">
+                                <td><input type="checkbox" class="payrollclassa-row-select" value="${index}"></td>
                                 <td> ${index+1} </td>
                                 <td> ${data.firstname??''} </td>
                                 <td> ${data.lastname??''} </td>
@@ -5248,6 +5256,7 @@ var payrollclassasetCurrentPage = (pageNum) => {
                                 <td> ${formatCurrency(data.salary)??''} </td>
                                 <td> ${formatCurrency(data.totaldeduction)??''} </td>
                                 <td> ${formatCurrency(data.netpayable)??''} </td>
+                                <td><button type="button" class="j-action-btn" style="text-transform: capitalize;background-color: green;">Pay</button></td>
                             </tr>
     `).join('')
         payrollclassa_datasource.forEach( (item, index) => {
@@ -5359,6 +5368,7 @@ var payrollclassbsetCurrentPage = (pageNum) => {
         console.log('payrollclassb_datasource', payrollclassb_datasource)
         document.getElementById("payrollclassbtablecontent").innerHTML = payrollclassb_datasource.map((data, index)=>`
                            <tr data-open="false" class="source-row-item">
+                                <td><input type="checkbox" class="payrollclassb-row-select" value="${index}"></td>
                                 <td> ${index+1} </td>
                                 <td> ${data.firstname??''} </td>
                                 <td> ${data.lastname??''} </td>
@@ -5368,6 +5378,7 @@ var payrollclassbsetCurrentPage = (pageNum) => {
                                 <td> ${data.department??''} </td>
                                 <td> ${formatCurrency(data.totalallowance)??''} </td>
                                 <td> ${formatCurrency(data.netpayable)??''} </td>
+                                <td><button type="button" class="j-action-btn" style="text-transform: capitalize;background-color: green;">Pay</button></td>
                             </tr>
     `).join('')
         payrollclassb_datasource.forEach( (item, index) => {
