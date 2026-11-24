@@ -634,6 +634,37 @@ if(groupname) groupname.addEventListener('click',opengroupname,false)
         .catch(error => console.log('error', error)); 
     }
 
+    let personnelBankCodes = [];
+
+    function findPersonnelBankFromCode(bankinfo) {
+        const [bankName, bankCode] = (bankinfo || '').split('|');
+        const bankIndex = personnelBankCodes?.findIndex(item => item.code == bankCode || item.name == bankName);
+        return bankIndex > -1 ? `${bankIndex}` : '';
+    }
+
+    function getPersonnelBankInfo(elementId) {
+        const bankIndex = document.getElementById(elementId).value;
+        const selectedBank = personnelBankCodes[+bankIndex];
+        return selectedBank ? `${selectedBank.name}|${selectedBank.code}` : '';
+    }
+
+    async function fetchPersonnelBankAccountNames() {
+        let result = await fetchRequest('../controllers/fetchbankaccountnames.php')
+        if(result) {
+            let parseResult = JSON.parse(result);
+            if(parseResult.status){
+                personnelBankCodes = parseResult.data;
+                let options = personnelBankCodes?.map((item, index) => `<option value="${index}"> ${item.name} </option>`).join('')
+                if(document.getElementById('personnelbankname1'))document.getElementById('personnelbankname1').innerHTML = '<option value=""> --Select Bank -- </option>' + options
+                if(document.getElementById('personnelbankname2'))document.getElementById('personnelbankname2').innerHTML = '<option value=""> --Select Bank -- </option>' + options
+            }
+            else {
+                if(document.getElementById('personnelbankname1'))document.getElementById('personnelbankname1').innerHTML = `<option value=""> --Select Bank -- </option>`
+                if(document.getElementById('personnelbankname2'))document.getElementById('personnelbankname2').innerHTML = `<option value=""> --Select Bank -- </option>`
+            }
+        }
+    }
+
     function personnelparamsdata(){
 		var paramstr = new FormData();
 		
@@ -657,9 +688,9 @@ if(groupname) groupname.addEventListener('click',opengroupname,false)
 		paramstr.append('weight', document.getElementById('personelweight').value);
 // 		paramstr.append('accountnumber', document.getElementById('personelaccountnumber').value);
 		paramstr.append('bankaccountnumber1', document.getElementById('personnelaccountnumber1').value);
-		paramstr.append('bankname1', document.getElementById('personnelbankname1').value);
+		paramstr.append('bankname1', getPersonnelBankInfo('personnelbankname1'));
 		paramstr.append('bankaccountnumber2', document.getElementById('personnelaccountnumber2').value);
-		paramstr.append('bankname2', document.getElementById('personnelbankname2').value);
+		paramstr.append('bankname2', getPersonnelBankInfo('personnelbankname2'));
 		paramstr.append('employmentdate', document.getElementById('personelemplymentdate').value);
 		paramstr.append('registereduseremail', document.getElementById('personelusernameemail').value);
 		/*paramstr.append('basicsalary', document.getElementById('personelbasicsalary').value);*/
@@ -719,9 +750,9 @@ if(groupname) groupname.addEventListener('click',opengroupname,false)
 		paramstr.append('weight', document.getElementById('personelweight').value);
 // 		paramstr.append('accountnumber', document.getElementById('personelaccountnumber').value);
 		paramstr.append('bankaccountnumber1', document.getElementById('personnelaccountnumber1').value);
-		paramstr.append('bankname1', document.getElementById('personnelbankname1').value);
+		paramstr.append('bankname1', getPersonnelBankInfo('personnelbankname1'));
 		paramstr.append('bankaccountnumber2', document.getElementById('personnelaccountnumber2').value);
-		paramstr.append('bankname2', document.getElementById('personnelbankname2').value);
+		paramstr.append('bankname2', getPersonnelBankInfo('personnelbankname2'));
 		paramstr.append('employmentdate', document.getElementById('personelemplymentdate').value);
 		paramstr.append('registereduseremail', document.getElementById('personelusernameemail').value);
 		/*paramstr.append('basicsalary', document.getElementById('personelbasicsalary').value);*/
@@ -893,6 +924,7 @@ function onOreProfileFileInputChange(event) {
         callController('fetchgroupname.php', null, 'fetchgroupname', null,  poppergroup, 'silent')
         callController('fetchlevel.php', null, 'fetchlevel', null,  popperlevel, 'silent')
         callController('fetchallusers.php', null, 'fetchallusers', null,  popperemail, 'silent')
+        await fetchPersonnelBankAccountNames()
         if(document.getElementById('personelsubmit'))document.getElementById('personelsubmit').addEventListener('click',e=>{
                 const submitresult=(result)=>{
                     if(result){
@@ -935,9 +967,9 @@ function onOreProfileFileInputChange(event) {
 		    document.getElementById('personellga').value = personnelsessiondata[0].personnel.lga ? personnelsessiondata[0].personnel.lga : '';
 		    document.getElementById('personelheight').value = personnelsessiondata[0].personnel.height ? personnelsessiondata[0].personnel.height : '';
 		    document.getElementById('personelweight').value = personnelsessiondata[0].personnel.weight ? personnelsessiondata[0].personnel.weight : '';
-		    document.getElementById('personnelbankname1').value = personnelsessiondata[0].personnel.bankname1 ? personnelsessiondata[0].personnel.bankname1 : '';
+		    document.getElementById('personnelbankname1').value = findPersonnelBankFromCode(personnelsessiondata[0].personnel.bankname1);
 		    document.getElementById('personnelaccountnumber1').value = personnelsessiondata[0].personnel.bankaccountnumber1 ? personnelsessiondata[0].personnel.bankaccountnumber1 : '';
-		    document.getElementById('personnelbankname2').value = personnelsessiondata[0].personnel.bankname2 ? personnelsessiondata[0].personnel.bankname2 : '';
+		    document.getElementById('personnelbankname2').value = findPersonnelBankFromCode(personnelsessiondata[0].personnel.bankname2);
 		    document.getElementById('personnelaccountnumber2').value = personnelsessiondata[0].personnel.bankaccountnumber2 ? personnelsessiondata[0].personnel.bankaccountnumber2 : '';
 		    document.getElementById('personelemplymentdate').value = personnelsessiondata[0].personnel.employmentdate ? personnelsessiondata[0].personnel.employmentdate : '';
 		    document.getElementById('personelusernameemail').value = personnelsessiondata[0].personnel.registereduseremail ? personnelsessiondata[0].personnel.registereduseremail : '';
