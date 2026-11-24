@@ -11,7 +11,7 @@ $displayhtml .= '<div class="orecardcontainer">';
 $displayhtml .= '<div class="staffloancontainer">';
 $displayhtml .= '<div class="inputcontainermsn icsn">';
 $displayhtml .= '<p class="normaltext">Select by Branch</p>';
-$displayhtml .= '<select id="appconbranch">';
+$displayhtml .= '<select id="appconbranchb">';
 $displayhtml .= '<option value="">--select branch--</option>';
 $displayhtml .= '</select>';
 $displayhtml .= '</div>';

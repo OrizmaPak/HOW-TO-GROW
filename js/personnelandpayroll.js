@@ -5118,8 +5118,11 @@ const confirmpayrollparams=()=>{
     return paramstr;
 }
 
-const confirmsalpoplocation =(data)=>{
-    document.getElementById('appconbranch').innerHTML += `${data.data.data.map(dat=>`<option value="${dat.id}">${dat.location.toUpperCase()}</option>`)}`
+const confirmsalpoplocation =(data, targetId = 'appconbranch')=>{
+    const branchSelect = document.getElementById(targetId);
+    if(!branchSelect) return;
+    branchSelect.innerHTML = '<option value="">--select branch--</option>';
+    branchSelect.innerHTML += data.data.data.map(dat=>`<option value="${dat.id}">${dat.location.toUpperCase()}</option>`).join('');
 }
 async function oreconfirmsalary() {
         //the fuction below is what calls the page and please put the 'override' as the second parameter for now.
@@ -5291,7 +5294,7 @@ async function orepayrollclassb() {
         jtabledata = document.getElementById('payrollclassbtablecontent');
         // paginationLimit = 10;
         initializePaginationParams(payrollclassbsetCurrentPage);
-        callController('fetchlocation.php', null, 'fetchlocation', null, confirmsalpoplocation)
+        callController('fetchlocation.php', null, 'fetchlocation', null, data => confirmsalpoplocation(data, 'appconbranchb'))
         
          var currentYear = new Date().getFullYear();
         let yearspresalaryapprovalyear = [];
@@ -5305,7 +5308,7 @@ async function orepayrollclassb() {
         getpersonneldataready();
         const payrollclassbparams=()=>{
                 let paramstr = new FormData();
-                paramstr.append('location', document.getElementById('appconbranch').value);
+                paramstr.append('location', document.getElementById('appconbranchb').value);
                 paramstr.append('month', document.getElementById('payrollclassbmonth').value);
                 paramstr.append('year', document.getElementById('payrollclassbyear').value);
                 return paramstr;
